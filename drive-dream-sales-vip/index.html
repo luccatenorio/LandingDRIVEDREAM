@@ -1,72 +1,79 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Drive Dream Sales | Comunidade VIP</title>
+    <title>Drive Dream Sales - Comunidade VIP</title>
+    <meta name="description" content="Acesso exclusivo a oportunidades automotivas premium." />
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
-            fontFamily: {
-              serif: ['"Playfair Display"', 'serif'],
-              sans: ['"Inter"', 'sans-serif'],
-              display: ['"Cinzel"', 'serif'],
-            },
             colors: {
-              gold: {
-                100: '#F9F1D8',
-                200: '#F0DEAA',
-                300: '#E6CB7D',
-                400: '#D4AF37', // Classic Gold
-                500: '#B4942D',
-                600: '#947924',
-                700: '#75601C',
-                800: '#564715',
-                900: '#382E0E',
-              },
+              primary: '#D4AF37', // Gold color from reference
               dark: {
-                950: '#0a0a0a', // Deep black
-                900: '#121212', // Off black
-                800: '#1c1c1c', // Graphite
+                900: '#111111',
+                800: '#1a1a1a',
+                700: '#252525',
               }
             },
-            backgroundImage: {
-              'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #F0DEAA 50%, #B4942D 100%)',
-              'gold-text': 'linear-gradient(to right, #F0DEAA, #D4AF37, #F0DEAA)',
+            fontFamily: {
+              sans: ['Plus Jakarta Sans', 'sans-serif'],
+            },
+            animation: {
+              'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+              'fade-in-left': 'fadeInLeft 0.8s ease-out forwards',
+              'fade-in-right': 'fadeInRight 0.8s ease-out forwards',
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              fadeInLeft: {
+                '0%': { opacity: '0', transform: 'translateX(-20px)' },
+                '100%': { opacity: '1', transform: 'translateX(0)' },
+              },
+              fadeInRight: {
+                '0%': { opacity: '0', transform: 'translateX(20px)' },
+                '100%': { opacity: '1', transform: 'translateX(0)' },
+              },
             }
           }
         }
       }
     </script>
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
       body {
-        background-color: #050505;
-        color: #e5e5e5;
+        background-color: #111111;
+        color: #ffffff;
       }
-      .text-gold-gradient {
-        background: linear-gradient(to right, #cfaa60, #fceeb5, #cfaa60);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        color: transparent;
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
       }
-      .border-gold-gradient {
-        border-image: linear-gradient(to right, #cfaa60, #fceeb5, #cfaa60) 1;
+      .animate-on-scroll {
+        opacity: 0;
       }
     </style>
   <script type="importmap">
 {
   "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0"
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0"
   }
 }
 </script>
