@@ -17,7 +17,9 @@ import {
   VolumeX, 
   Play,
   EyeOff,
-  CheckCircle2
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { Button } from './components/Button';
 import { StatusWidget } from './components/StatusWidget';
@@ -55,8 +57,23 @@ const FadeIn: React.FC<{ children: React.ReactNode; delay?: number; direction?: 
   );
 };
 
-// Realistic iPhone Mockup Component
-const IphoneMockup: React.FC<{ imageSrc: string }> = ({ imageSrc }) => {
+// Realistic iPhone Mockup Component with Carousel
+interface MediaItem {
+  type: 'image' | 'video';
+  src: string;
+}
+
+const IphoneMockup: React.FC<{ items: MediaItem[] }> = ({ items }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % items.length);
+    }, 4000); // Rotate every 4 seconds
+    return () => clearInterval(interval);
+  }, [items.length]);
+
   return (
     <div className="relative mx-auto border-gray-900 bg-gray-900 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-xl flex flex-col overflow-hidden">
         {/* Side Buttons */}
@@ -68,12 +85,12 @@ const IphoneMockup: React.FC<{ imageSrc: string }> = ({ imageSrc }) => {
         {/* Screen */}
         <div className="rounded-[2rem] overflow-hidden w-full h-full bg-dark-900 relative border border-gray-800">
              {/* Dynamic Island */}
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 h-[28px] w-[100px] bg-black z-20 rounded-b-[1rem] flex items-center justify-center">
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 h-[28px] w-[100px] bg-black z-30 rounded-b-[1rem] flex items-center justify-center">
                  <div className="w-16 h-3 bg-gray-900/50 rounded-full"></div>
             </div>
             
             {/* Status Bar Fake */}
-            <div className="absolute top-1 px-8 w-full flex justify-between text-[10px] text-white font-medium z-10 pt-2">
+            <div className="absolute top-1 px-8 w-full flex justify-between text-[10px] text-white font-medium z-20 pt-2">
                 <span>14:06</span>
                 <div className="flex gap-1">
                     <div className="w-3 h-3 bg-white/20 rounded-sm"></div>
@@ -81,15 +98,43 @@ const IphoneMockup: React.FC<{ imageSrc: string }> = ({ imageSrc }) => {
                 </div>
             </div>
 
-            {/* Content Image */}
-            <img 
-                src={imageSrc} 
-                alt="App Screen" 
-                className="w-full h-full object-cover" 
-            />
+            {/* Sound Toggle */}
+            <button 
+                onClick={() => setIsMuted(!isMuted)}
+                className="absolute bottom-8 right-4 z-40 p-2 bg-black/40 backdrop-blur-md rounded-full text-white/90 hover:bg-black/60 transition-colors cursor-pointer"
+            >
+                {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+            </button>
+
+            {/* Media Carousel */}
+            {items.map((item, index) => (
+                <div 
+                    key={index}
+                    className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                        index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                    }`}
+                >
+                    {item.type === 'video' ? (
+                        <video 
+                            src={item.src} 
+                            className="w-full h-full object-cover" 
+                            autoPlay 
+                            muted={isMuted || index !== currentIndex} // Only unmute if it's the current video and sound is on
+                            loop 
+                            playsInline
+                        />
+                    ) : (
+                        <img 
+                            src={item.src} 
+                            alt="Screen Content" 
+                            className="w-full h-full object-cover" 
+                        />
+                    )}
+                </div>
+            ))}
             
             {/* Home Bar */}
-            <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-[120px] h-[4px] bg-white/50 rounded-full z-20"></div>
+            <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-[120px] h-[4px] bg-white/50 rounded-full z-30"></div>
         </div>
     </div>
   );
@@ -98,6 +143,54 @@ const IphoneMockup: React.FC<{ imageSrc: string }> = ({ imageSrc }) => {
 const App: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = React.useState(true);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+
+  const videos = [
+    {
+      url: "https://res.cloudinary.com/dxx35zhn6/video/upload/v1764716943/WhatsApp_Video_2025-11-28_at_09.03.28_ere4db.mp4",
+      quote: '"Obrigado João pela oportunidade e pelo carro que agente fez negócio."',
+      label: "Feedback Real"
+    },
+    {
+      url: "https://res.cloudinary.com/dxx35zhn6/video/upload/v1764918274/4_vfcbsw.mp4",
+      quote: '"Foram eles que me ajudaram a adquirir meu carro novo."',
+      label: " Lulinha, Cantor"
+    },
+    {
+      url: "https://res.cloudinary.com/dxx35zhn6/video/upload/v1764918244/1_ow8hwd.mp4",
+      quote: '"VIm fazer um testemunho, do ótimo atendimento que eu tive"',
+      label: "Atendimento de qualidade"
+    },
+    {
+      url: "https://res.cloudinary.com/dxx35zhn6/video/upload/v1764918267/3_xhs9si.mp4",
+      quote: '"Fui super bem atendida, carro veio em perfeito estado"',
+      label: "Cliente satistfeita"
+    },
+    {
+      url: "https://res.cloudinary.com/dxx35zhn6/video/upload/v1764918259/2_kixtjp.mp4",
+      quote: '"Assino em baixo."',
+      label: "Compra verificada"
+    }
+  ];
+
+  const phoneContent: MediaItem[] = [
+    { type: 'image', src: 'https://i.ibb.co/kgdhvJr9/Whats-App-Image-2025-12-03-at-16-50-21.jpg' },
+    { type: 'video', src: 'https://res.cloudinary.com/dxx35zhn6/video/upload/v1764919456/2_wajfal.mp4' },
+    { type: 'video', src: 'https://res.cloudinary.com/dxx35zhn6/video/upload/v1764919456/1_ugemv1.mp4' },
+    { type: 'video', src: 'https://res.cloudinary.com/dxx35zhn6/video/upload/v1764919457/3_wr4rdg.mp4' },
+  ];
+
+  const currentVideo = videos[currentVideoIndex];
+
+  const handleNextVideo = () => {
+    setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
+    setIsMuted(true); // Always start muted when changing video for better UX
+  };
+
+  const handlePrevVideo = () => {
+    setCurrentVideoIndex((prev) => (prev - 1 + videos.length) % videos.length);
+    setIsMuted(true);
+  };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -180,7 +273,7 @@ const App: React.FC = () => {
                <Button onClick={scrollToTop} className="shadow-[0_0_30px_rgba(212,175,55,0.15)] animate-pulse hover:animate-none w-full sm:w-auto">
                 QUERO GARANTIR MEU ACESSO VIP
               </Button>
-              <p className="text-[10px] text-gray-500 mt-3 uppercase tracking-widest pl-1">Vagas limitadas para 2026</p>
+              <p className="text-[10px] text-gray-500 mt-3 uppercase tracking-widest pl-1">Acesso Gratuito • Vagas Limitadas</p>
             </div>
           </div>
 
@@ -206,43 +299,83 @@ const App: React.FC = () => {
                 </h2>
               </div>
 
-              {/* Reduced size further to max-w-[300px] */}
-              <div className="max-w-[280px] md:max-w-[300px] mx-auto bg-dark-800 rounded-2xl overflow-hidden shadow-2xl border border-gray-800 relative group">
-                  {/* Aspect ratio 9/16 for portrait video look */}
-                  <div className="relative aspect-[9/16] bg-black">
-                    <video 
-                      ref={videoRef}
-                      src="https://res.cloudinary.com/dxx35zhn6/video/upload/v1764716943/WhatsApp_Video_2025-11-28_at_09.03.28_ere4db.mp4"
-                      className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 transition-opacity duration-500"
-                      autoPlay 
-                      loop 
-                      muted 
-                      playsInline
-                    />
-                    
-                    {/* Custom Controls Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none" />
-                    
-                    {/* Mute Button - Positioned with z-index to stay clickable */}
-                    <button 
-                      onClick={toggleMute}
-                      className="absolute bottom-4 right-4 p-2 bg-black/50 backdrop-blur-md rounded-full text-white hover:bg-primary hover:text-black transition-colors z-30 cursor-pointer"
-                    >
-                        {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                    </button>
+              {/* Video Carousel Container */}
+              <div className="relative max-w-[280px] md:max-w-[300px] mx-auto group">
+                  
+                  {/* Previous Button (Desktop) */}
+                  <button 
+                    onClick={handlePrevVideo}
+                    className="hidden md:flex absolute -left-12 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-primary transition-colors z-20"
+                  >
+                    <ChevronLeft className="w-8 h-8" />
+                  </button>
 
-                    {/* Text Content - Added padding-right to avoid overlap with button */}
-                    <div className="absolute bottom-4 left-4 right-14 z-20 text-left pointer-events-none">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-white/80">Feedback Real</span>
+                  <div className="bg-dark-800 rounded-2xl overflow-hidden shadow-2xl border border-gray-800 relative">
+                      {/* Aspect ratio 9/16 for portrait video look */}
+                      <div className="relative aspect-[9/16] bg-black">
+                        <video 
+                          key={currentVideo.url}
+                          ref={videoRef}
+                          src={currentVideo.url}
+                          className="w-full h-full object-cover object-top opacity-90 hover:opacity-100 transition-opacity duration-500"
+                          autoPlay 
+                          loop 
+                          muted 
+                          playsInline
+                        />
+                        
+                        {/* Custom Controls Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none" />
+                        
+                        {/* Mute Button - Positioned with z-index to stay clickable */}
+                        <button 
+                          onClick={toggleMute}
+                          className="absolute bottom-4 right-4 p-2 bg-black/50 backdrop-blur-md rounded-full text-white hover:bg-primary hover:text-black transition-colors z-30 cursor-pointer"
+                        >
+                            {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                        </button>
+
+                        {/* Text Content - Added padding-right to avoid overlap with button */}
+                        <div className="absolute bottom-4 left-4 right-14 z-20 text-left pointer-events-none">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-white/80">{currentVideo.label}</span>
+                            </div>
+                            {/* Smaller font size as requested */}
+                            <p className="text-white text-xs font-medium leading-tight opacity-90">
+                            {currentVideo.quote}
+                            </p>
                         </div>
-                        {/* Smaller font size as requested */}
-                        <p className="text-white text-xs font-medium leading-tight opacity-90">
-                        "Obrigado João pela oportunidade e pelo carro que agente fez negócio."
-                        </p>
-                    </div>
+                      </div>
                   </div>
+
+                  {/* Next Button (Desktop) */}
+                  <button 
+                    onClick={handleNextVideo}
+                    className="hidden md:flex absolute -right-12 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-primary transition-colors z-20"
+                  >
+                    <ChevronRight className="w-8 h-8" />
+                  </button>
+
+                  {/* Pagination Dots */}
+                  <div className="flex justify-center items-center gap-2 mt-4">
+                    {videos.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => {
+                          setCurrentVideoIndex(index);
+                          setIsMuted(true);
+                        }}
+                        className={`transition-all duration-300 rounded-full ${
+                          index === currentVideoIndex 
+                            ? 'w-4 h-2 bg-primary' 
+                            : 'w-2 h-2 bg-gray-600 hover:bg-gray-400'
+                        }`}
+                        aria-label={`Go to video ${index + 1}`}
+                      />
+                    ))}
+                  </div>
+
               </div>
             </FadeIn>
 
@@ -364,12 +497,12 @@ const App: React.FC = () => {
               </FadeIn>
             </div>
 
-            {/* Replaced Mockup Image with Realistic IphoneMockup */}
+            {/* Replaced Mockup Image with Realistic IphoneMockup Carousel */}
             <FadeIn direction="right" delay={300}>
                <div className="relative group max-w-sm mx-auto">
                   <div className="absolute -inset-0.5 bg-gradient-to-b from-primary/20 to-transparent blur-2xl rounded-3xl opacity-60 group-hover:opacity-80 transition-opacity duration-700"></div>
                   <div className="transform transition-transform duration-500 hover:scale-[1.01]">
-                    <IphoneMockup imageSrc="https://i.ibb.co/kgdhvJr9/Whats-App-Image-2025-12-03-at-16-50-21.jpg" />
+                    <IphoneMockup items={phoneContent} />
                   </div>
                </div>
             </FadeIn>
