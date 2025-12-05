@@ -147,14 +147,14 @@ const App: React.FC = () => {
 
   const videos = [
     {
-      url: "https://res.cloudinary.com/dxx35zhn6/video/upload/v1764716943/WhatsApp_Video_2025-11-28_at_09.03.28_ere4db.mp4",
-      quote: '"Obrigado João pela oportunidade e pelo carro que agente fez negócio."',
-      label: "Feedback Real"
-    },
-    {
       url: "https://res.cloudinary.com/dxx35zhn6/video/upload/v1764918274/4_vfcbsw.mp4",
       quote: '"Foram eles que me ajudaram a adquirir meu carro novo."',
       label: " Lulinha, Cantor"
+    },
+    {
+      url: "https://res.cloudinary.com/dxx35zhn6/video/upload/v1764716943/WhatsApp_Video_2025-11-28_at_09.03.28_ere4db.mp4",
+      quote: '"Obrigado João pela oportunidade e pelo carro que agente fez negócio."',
+      label: "Feedback Real"
     },
     {
       url: "https://res.cloudinary.com/dxx35zhn6/video/upload/v1764918244/1_ow8hwd.mp4",
