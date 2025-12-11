@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { 
   ShieldCheck, 
@@ -145,6 +144,7 @@ const App: React.FC = () => {
   const [isMuted, setIsMuted] = React.useState(true);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [currentFounderIndex, setCurrentFounderIndex] = useState(0);
+  const WHATSAPP_LINK = "https://chat.whatsapp.com/DqIm09jrP7y9T2UlwlbihS";
 
   const videos = [
     {
@@ -206,8 +206,8 @@ const App: React.FC = () => {
     setIsMuted(true);
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const handleJoin = () => {
+    window.open(WHATSAPP_LINK, '_blank');
   };
 
   const toggleMute = () => {
@@ -284,7 +284,7 @@ const App: React.FC = () => {
             </div>
 
             <div className="pt-4 w-full sm:w-auto animate-fade-in-up" style={{ animationDelay: '1000ms' }}>
-               <Button onClick={scrollToTop} className="shadow-[0_0_30px_rgba(212,175,55,0.15)] animate-pulse hover:animate-none w-full sm:w-auto">
+               <Button onClick={handleJoin} className="shadow-[0_0_30px_rgba(212,175,55,0.15)] animate-pulse hover:animate-none w-full sm:w-auto">
                 QUERO GARANTIR MEU ACESSO VIP
               </Button>
               <p className="text-[10px] text-gray-500 mt-3 uppercase tracking-widest pl-1">Acesso Gratuito • Vagas Limitadas</p>
@@ -603,7 +603,7 @@ const App: React.FC = () => {
             </div>
 
             <div className="flex flex-col items-center gap-6">
-                <Button onClick={scrollToTop} className="py-4 px-10 text-base shadow-[0_0_40px_rgba(212,175,55,0.2)] hover:shadow-[0_0_60px_rgba(212,175,55,0.4)] animate-pulse hover:animate-none w-full md:w-auto">
+                <Button onClick={handleJoin} className="py-4 px-10 text-base shadow-[0_0_40px_rgba(212,175,55,0.2)] hover:shadow-[0_0_60px_rgba(212,175,55,0.4)] animate-pulse hover:animate-none w-full md:w-auto">
                   QUERO FAZER PARTE DO CÍRCULO FECHADO
                 </Button>
                 
@@ -624,7 +624,7 @@ const App: React.FC = () => {
              <p className="text-xs text-gray-500">Vagas limitadas • Encerramento em breve</p>
           </div>
           <div className="flex-1 md:flex-none w-full md:w-auto">
-            <Button fullWidth onClick={scrollToTop} className="py-3 shadow-lg">
+            <Button fullWidth onClick={handleJoin} className="py-3 shadow-lg">
               QUERO GARANTIR MEU ACESSO
             </Button>
           </div>
