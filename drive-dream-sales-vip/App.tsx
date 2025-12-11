@@ -255,7 +255,7 @@ const App: React.FC = () => {
             
             {/* Logo */}
             <img 
-              src="https://drivedreamsales.com.br/wp-content/uploads/2024/09/WhatsApp_Image_2024-09-09_at_15.10.40-transformed2.png" 
+              src="https://i.ibb.co/8g9C1chV/Whats-App-Image-2024-09-09-at-15-10-40-transformed2.png" 
               alt="Drive Dream Sales" 
               className="h-12 md:h-16 object-contain mb-4 md:mb-8 opacity-90"
             />
@@ -575,7 +575,7 @@ const App: React.FC = () => {
               
               <div className="flex items-center gap-4 mt-12">
                  <div className="h-px bg-gray-800 flex-1"></div>
-                 <img src="https://drivedreamsales.com.br/wp-content/uploads/2024/09/WhatsApp_Image_2024-09-09_at_15.10.40-transformed2.png" alt="Signature" className="h-8 opacity-50 grayscale" />
+                 <img src="https://i.ibb.co/8g9C1chV/Whats-App-Image-2024-09-09-at-15-10-40-transformed2.png" alt="Signature" className="h-8 opacity-50 grayscale" />
               </div>
             </FadeIn>
           </div>
