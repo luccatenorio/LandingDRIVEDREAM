@@ -144,6 +144,7 @@ const App: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = React.useState(true);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [currentFounderIndex, setCurrentFounderIndex] = useState(0);
 
   const videos = [
     {
@@ -179,6 +180,19 @@ const App: React.FC = () => {
     { type: 'video', src: 'https://res.cloudinary.com/dxx35zhn6/video/upload/v1764919456/1_ugemv1.mp4' },
     { type: 'video', src: 'https://res.cloudinary.com/dxx35zhn6/video/upload/v1764919457/3_wr4rdg.mp4' },
   ];
+
+  const founderImages = [
+    "https://i.ibb.co/BVJptKXh/Whats-App-Image-2025-11-28-at-09-01-09.jpg",
+    "https://i.ibb.co/8DQYHbZx/Whats-App-Image-2025-12-10-at-21-32-58.jpg",
+    "https://i.ibb.co/XZXXzZjX/a.jpg"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentFounderIndex((prev) => (prev + 1) % founderImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   const currentVideo = videos[currentVideoIndex];
 
@@ -518,12 +532,17 @@ const App: React.FC = () => {
             <FadeIn direction="right">
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-transparent blur-2xl rounded-full opacity-50 group-hover:opacity-75 transition-opacity duration-700"></div>
               <div className="relative rounded-2xl overflow-hidden border border-gray-800 shadow-2xl aspect-[3/4] max-h-[600px] w-full bg-dark-800 mx-auto">
-                <img 
-                  src="https://i.ibb.co/BVJptKXh/Whats-App-Image-2025-11-28-at-09-01-09.jpg"
-                  alt="João Gomes" 
-                  className="w-full h-full object-cover object-top transform hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
+                {founderImages.map((src, index) => (
+                    <img 
+                        key={index}
+                        src={src}
+                        alt="João Gomes" 
+                        className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ease-in-out ${
+                            index === currentFounderIndex ? 'opacity-100' : 'opacity-0'
+                        }`}
+                    />
+                ))}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6 z-10">
                    <p className="text-white font-bold text-lg">João Gomes</p>
                    <p className="text-primary text-xs tracking-wider uppercase"> CEO & FUNDADOR </p>
                 </div>
