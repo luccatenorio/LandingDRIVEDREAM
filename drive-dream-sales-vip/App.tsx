@@ -144,41 +144,48 @@ const App: React.FC = () => {
   const [isMuted, setIsMuted] = React.useState(true);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [currentFounderIndex, setCurrentFounderIndex] = useState(0);
+  
+  // Touch state for swipe
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
   const WHATSAPP_LINK = "https://chat.whatsapp.com/DqIm09jrP7y9T2UlwlbihS";
 
   const videos = [
     {
-      url: "https://res.cloudinary.com/dxx35zhn6/video/upload/v1764918274/4_vfcbsw.mp4",
+      url: "https://lpqnvzdfdsvsgyexzifj.supabase.co/storage/v1/object/public/videoslpdrivedream/WhatsApp%20Video%202025-12-26%20at%2014.33.43.mp4",
       quote: '"Foram eles que me ajudaram a adquirir meu carro novo."',
       label: " Lulinha, Cantor"
     },
     {
-      url: "https://res.cloudinary.com/dxx35zhn6/video/upload/v1764716943/WhatsApp_Video_2025-11-28_at_09.03.28_ere4db.mp4",
+      url: "https://lpqnvzdfdsvsgyexzifj.supabase.co/storage/v1/object/public/videoslpdrivedream/WhatsApp%20Video%202025-12-26%20at%2014.33.42.mp4",
       quote: '"Obrigado João pela oportunidade e pelo carro que agente fez negócio."',
       label: "Feedback Real"
     },
     {
-      url: "https://res.cloudinary.com/dxx35zhn6/video/upload/v1764918244/1_ow8hwd.mp4",
+      url: "https://lpqnvzdfdsvsgyexzifj.supabase.co/storage/v1/object/public/videoslpdrivedream/WhatsApp%20Video%202025-12-26%20at%2023.mp4",
       quote: '"VIm fazer um testemunho, do ótimo atendimento que eu tive"',
       label: "Atendimento de qualidade"
     },
     {
-      url: "https://res.cloudinary.com/dxx35zhn6/video/upload/v1764918267/3_xhs9si.mp4",
+      url: "https://lpqnvzdfdsvsgyexzifj.supabase.co/storage/v1/object/public/videoslpdrivedream/WhatsApp%20Video%202025-12-26%20at%201.mp4",
       quote: '"Fui super bem atendida, carro veio em perfeito estado"',
       label: "Cliente satistfeita"
     },
     {
-      url: "https://res.cloudinary.com/dxx35zhn6/video/upload/v1764918259/2_kixtjp.mp4",
-      quote: '"Assino em baixo."',
-      label: "Compra verificada"
+      url: "https://lpqnvzdfdsvsgyexzifj.supabase.co/storage/v1/object/public/videoslpdrivedream/2.mp4",
+      quote: '"Através deles eu adquiri meu carro novo."',
+      label: "Iguinho - Banda Iguinho e Lulinha"
     }
   ];
 
   const phoneContent: MediaItem[] = [
     { type: 'image', src: 'https://i.ibb.co/kgdhvJr9/Whats-App-Image-2025-12-03-at-16-50-21.jpg' },
-    { type: 'video', src: 'https://res.cloudinary.com/dxx35zhn6/video/upload/v1764919456/2_wajfal.mp4' },
-    { type: 'video', src: 'https://res.cloudinary.com/dxx35zhn6/video/upload/v1764919456/1_ugemv1.mp4' },
-    { type: 'video', src: 'https://res.cloudinary.com/dxx35zhn6/video/upload/v1764919457/3_wr4rdg.mp4' },
+    { type: 'video', src: 'https://lpqnvzdfdsvsgyexzifj.supabase.co/storage/v1/object/public/videoslpdrivedream/WhatsApp%20Video%202025-12-26%20at%2014.33.44123213213.mp4' },
+    { type: 'video', src: 'https://lpqnvzdfdsvsgyexzifj.supabase.co/storage/v1/object/public/videoslpdrivedream/WhatsApp%20Video%202025-12-26%20at%2014.33.4312321.mp4' },
   ];
 
   const founderImages = [
@@ -204,6 +211,30 @@ const App: React.FC = () => {
   const handlePrevVideo = () => {
     setCurrentVideoIndex((prev) => (prev - 1 + videos.length) % videos.length);
     setIsMuted(true);
+  };
+
+  // Swipe Handlers
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null); // Reset touch end
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe) {
+      handleNextVideo();
+    }
+    if (isRightSwipe) {
+      handlePrevVideo();
+    }
   };
 
   const handleJoin = () => {
@@ -314,7 +345,12 @@ const App: React.FC = () => {
               </div>
 
               {/* Video Carousel Container */}
-              <div className="relative max-w-[280px] md:max-w-[300px] mx-auto group">
+              <div 
+                className="relative max-w-[280px] md:max-w-[300px] mx-auto group"
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
+              >
                   
                   {/* Previous Button (Desktop) */}
                   <button 
