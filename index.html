@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drive Dream Sales — Comunidade VIP WhatsApp</title>
+  <meta name="description" content="O canal exclusivo onde compradores encontram carros de luxo com os melhores preços do Brasil. Acesse a Comunidade VIP no WhatsApp.">
+  
+  <!-- Official DDS Favicon -->
+  <link rel="icon" type="image/jpeg" href="assets/official_dds_logo.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="assets/official_dds_logo.jpg">
+  <link rel="apple-touch-icon" href="assets/official_dds_logo.jpg">
+  
+  <!-- Premium Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       DDS DESIGN SYSTEM - PERFECT FULL 360° CONIC BORDER ANIMATION
+       ========================================================================== */
+    @property --border-angle {
+      syntax: "<angle>";
+      inherits: false;
+      initial-value: 0deg;
+    }
+
+    @keyframes rotateBorder {
+      0% { --border-angle: 0deg; }
+      100% { --border-angle: 360deg; }
+    }
+
+    :root {
+      --color-black: #08080A;
+      --color-dark-surface: #0E0E12;
+      --color-card-bg: #0D0D12;
+      --color-card-hover: #14141E;
+      
+      --color-white: #FFFFFF;
+      --color-text-subtle: #A0A0B0;
+      
+      /* Official DDS Gold */
+      --gold-main: #E0B739;
+      --gold-hover: #F0C749;
+      --gold-subtle: rgba(224, 183, 57, 0.15);
+      --gold-border: rgba(224, 183, 57, 0.35);
+      --gold-gradient: linear-gradient(135deg, #F5D365 0%, #E0B739 50%, #B88E14 100%);
+      
+      --radius-sm: 8px;
+      --radius-btn: 12px;
+      --radius-card: 20px;
+      --radius-full: 9999px;
+      
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: var(--font-body);
+      background-color: var(--color-black);
+      color: var(--color-white);
+      overflow-x: hidden;
+    }
+
+    body {
+      min-height: 100vh;
+      line-height: 1.5;
+      background-color: var(--color-black);
+      position: relative;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .badge-pill-sm {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 16px;
+      border-radius: var(--radius-full);
+      background: rgba(224, 183, 57, 0.08);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-main);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(24px, 3.2vw, 38px);
+      font-weight: 800;
+      color: var(--color-white);
+      letter-spacing: -0.01em;
+    }
+
+    .btn-dds-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 36px;
+      background: var(--gold-main);
+      color: #0A0A0C;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      border-radius: var(--radius-full);
+      border: none;
+      box-shadow: 0 8px 30px rgba(224, 183, 57, 0.4);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-dds-gold:hover {
+      background: var(--gold-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(224, 183, 57, 0.6);
+    }
+
+    /* ==========================================================================
+       UNCLIPPER CARD ANIMATION (FULL 360° SWEEP AROUND ENTIRE PERIMETER)
+       ========================================================================== */
+    .benefit-card, .deal-card, .testimonial-card {
+      position: relative;
+      background: var(--color-card-bg);
+      border-radius: var(--radius-card);
+      transition: all 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 1;
+    }
+
+    .benefit-card::before, .deal-card::before, .testimonial-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: calc(var(--radius-card) + 2px);
+      padding: 2px;
+      background: conic-gradient(from var(--border-angle), transparent 25%, rgba(224, 183, 57, 0.3) 65%, var(--gold-main) 92%, #FFFFFF 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .benefit-card:hover::before, .deal-card:hover::before, .testimonial-card:hover::before {
+      opacity: 1;
+      animation: rotateBorder 1.8s linear infinite;
+    }
+
+    .benefit-card:hover, .deal-card:hover, .testimonial-card:hover {
+      background: var(--color-card-hover);
+      transform: translateY(-5px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.9), 0 0 25px rgba(224, 183, 57, 0.22);
+    }
+
+    /* ==========================================================================
+       SECTION 1: HERO SECTION
+       ========================================================================== */
+    .hero-hero-wrapper {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 25px 0 10px;
+      background-image: url('assets/hero_cars_bg.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+
+    .hero-hero-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        linear-gradient(180deg, rgba(8,8,10,0.85) 0%, rgba(8,8,10,0.4) 50%, rgba(8,8,10,0.92) 100%);
+      z-index: 1;
+    }
+
+    .hero-layout-left {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-content-box {
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 94vh;
+      margin: 0 auto;
+    }
+
+    .pill-tagline {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-main);
+      margin-bottom: 12px;
+      display: inline-block;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+    }
+
+    .hero-headline {
+      font-family: var(--font-heading);
+      font-size: clamp(26px, 3.2vw, 42px);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--color-white);
+      margin-bottom: 0;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.95);
+    }
+
+    .hero-headline highlight { color: var(--gold-main); }
+
+    .hero-subheadline,
+    .google-pill {
+      display: none !important;
+    }
+
+    .btn-dds-gold {
+      margin-top: auto;
+    }
+
+    .subtext-vagas {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text-subtle);
+      margin-top: 10px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+    }
+
+    /* Discreet animated gold scroll indicator */
+    .scroll-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 12px;
+      color: var(--gold-main);
+      opacity: 0.85;
+      cursor: pointer;
+      animation: bounceGold 2s infinite;
+      transition: all 0.3s ease;
+    }
+
+    .scroll-indicator:hover {
+      opacity: 1;
+      transform: translateY(2px);
+    }
+
+    .scroll-indicator svg {
+      width: 22px;
+      height: 22px;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.8));
+    }
+
+    @keyframes bounceGold {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(6px);
+      }
+      60% {
+        transform: translateY(3px);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-hero-wrapper {
+        background-image: url('assets/hero_cars_bg_mobile.jpg');
+        background-position: center center;
+        background-size: cover;
+        padding: 25px 0 15px;
+        min-height: 96vh;
+      }
+      .hero-layout-left {
+        align-items: center;
+        margin-top: 0;
+        width: 100%;
+      }
+      .hero-content-box {
+        align-items: center;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        min-height: 88vh;
+      }
+      .hero-subheadline, .google-pill {
+        display: none !important;
+      }
+      .pill-tagline {
+        margin-top: 0;
+        margin-bottom: 8px;
+      }
+      .hero-headline {
+        margin-bottom: 14px;
+        font-size: clamp(22px, 6.2vw, 30px);
+      }
+      .btn-dds-gold {
+        margin-top: auto;
+      }
+      .subtext-vagas {
+        margin-top: 8px;
+      }
+      .scroll-indicator {
+        margin-top: 8px;
+      }
+      .hero-hero-wrapper::before {
+        background: linear-gradient(180deg, rgba(8,8,10,0.82) 0%, rgba(8,8,10,0.45) 50%, rgba(8,8,10,0.85) 100%);
+      }
+
+      /* Section 2: 3 Cards Grid (2 on top row, 1 centered below) */
+      .vip-benefits-section {
+        padding: 40px 0 30px;
+      }
+      .benefits-grid-3 {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .benefits-grid-3 .benefit-card-3 {
+        padding: 16px 10px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        border-radius: 14px !important;
+        gap: 6px !important;
+        box-sizing: border-box !important;
+        min-width: 0 !important;
+        width: 100% !important;
+      }
+      .benefits-grid-3 .benefit-card-3:nth-child(3) {
+        grid-column: 1 / span 2 !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+      }
+
+      /* Section 4: 4 Cards Grid (2x2) */
+      .benefits-section {
+        padding: 40px 0 30px;
+      }
+      .benefits-grid-4 {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .benefit-card-4 {
+        padding: 16px 10px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        border-radius: 14px !important;
+        gap: 6px !important;
+        box-sizing: border-box !important;
+        min-width: 0 !important;
+        width: 100% !important;
+      }
+
+      /* Icons and text scaling for small mobile screens */
+      .benefit-icon-box {
+        width: 34px !important;
+        height: 34px !important;
+        margin-bottom: 2px !important;
+      }
+      .benefit-icon-box svg {
+        width: 18px !important;
+        height: 18px !important;
+      }
+      .benefit-icon {
+        font-size: 20px !important;
+        margin-bottom: 0 !important;
+      }
+      .benefit-card-3 .benefit-title,
+      .benefit-card-4 .benefit-title {
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        line-height: 1.25 !important;
+      }
+      .benefit-card-3 .benefit-desc,
+      .benefit-card-4 .benefit-desc {
+        font-size: 10.5px !important;
+        line-height: 1.35 !important;
+      }
+
+      /* Section 3: Mobile Deals Slider Optimization (peek second deal card) */
+      .offers-section {
+        padding: 40px 0 25px !important;
+      }
+      .slider-outer-wrapper {
+        padding: 0 !important;
+        margin-top: 16px !important;
+      }
+      .prev-arrow { left: 0px !important; width: 34px !important; height: 34px !important; font-size: 18px !important; }
+      .next-arrow { right: 0px !important; width: 34px !important; height: 34px !important; font-size: 18px !important; }
+
+      .offers-slider-container,
+      .testimonials-slider-container {
+        gap: 12px !important;
+        padding: 10px 10px 20px !important;
+      }
+
+      .deal-card {
+        width: 78vw !important;
+        max-width: 290px !important;
+        flex-shrink: 0 !important;
+      }
+
+      .deal-image-wrap {
+        height: 160px !important;
+      }
+
+      .deal-badge-left, .deal-badge-right {
+        font-size: 10px !important;
+        padding: 3px 8px !important;
+        top: 8px !important;
+      }
+      .deal-badge-left { left: 8px !important; }
+      .deal-badge-right { right: 8px !important; }
+
+      .deal-body {
+        padding: 14px 12px !important;
+        gap: 8px !important;
+      }
+
+      .deal-location {
+        font-size: 10px !important;
+      }
+
+      .deal-title {
+        font-size: 16px !important;
+      }
+
+      .deal-specs-row span {
+        font-size: 10px !important;
+        padding: 2px 7px !important;
+      }
+
+      .deal-price-box {
+        padding: 10px 12px !important;
+        margin-bottom: 10px !important;
+        gap: 3px !important;
+      }
+
+      .price-top-row, .price-repasse-tag {
+        font-size: 11px !important;
+      }
+
+      .price-current {
+        font-size: 19px !important;
+      }
+
+      .price-economy {
+        font-size: 11px !important;
+      }
+
+      .deal-checklist {
+        font-size: 11.5px !important;
+        gap: 6px !important;
+      }
+
+      /* Section 5: Mobile Testimonials Slider Optimization (2 cards visible on screen) */
+      .social-proof-section {
+        padding: 40px 0 25px !important;
+      }
+      .testimonials-slider-container {
+        gap: 10px !important;
+        padding: 10px 8px 20px !important;
+      }
+      .testimonial-card {
+        width: 75vw !important;
+        max-width: 275px !important;
+        flex-shrink: 0 !important;
+        padding: 18px 14px !important;
+        border-radius: 16px !important;
+        gap: 10px !important;
+      }
+      .stars-row {
+        font-size: 13px !important;
+        letter-spacing: 1.5px !important;
+      }
+      .testimonial-text {
+        font-size: 12px !important;
+        line-height: 1.5 !important;
+      }
+      .testimonial-author {
+        font-size: 11.5px !important;
+      }
+    }
+
+    /* ==========================================================================
+       SECTION 2: 3 CARDS DE VANTAGENS LOGO ABAIXO DA HERO
+       ========================================================================== */
+    .vip-benefits-section {
+      padding: 60px 0 40px;
+      background: var(--color-black);
+      position: relative;
+    }
+
+    .benefits-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .benefit-card-3 {
+      padding: 30px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .benefit-icon-box {
+      width: 46px;
+      height: 46px;
+      border-radius: var(--radius-sm);
+      background: rgba(224, 183, 57, 0.12);
+      border: 1px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-main);
+    }
+
+    .benefit-icon-box svg { width: 24px; height: 24px; }
+    .benefit-card-3 .benefit-title { font-family: var(--font-heading); font-size: 19px; font-weight: 700; color: var(--color-white); }
+    .benefit-card-3 .benefit-desc { font-family: var(--font-body); font-size: 14px; color: var(--color-text-subtle); line-height: 1.6; }
+
+    /* ==========================================================================
+       SECTION 3: SLIDER MANUAL DE OFERTAS REAIS (NO CLIPPING ON BORDER HOVER)
+       ========================================================================== */
+    .offers-section {
+      padding: 50px 0 30px;
+      background: var(--color-black);
+      position: relative;
+    }
+
+    .slider-outer-wrapper {
+      position: relative;
+      margin-top: 24px;
+      padding: 0 10px;
+    }
+
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(14, 14, 18, 0.95);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-main);
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+      transition: all 0.25s ease;
+    }
+
+    .slider-arrow:hover {
+      background: var(--gold-main);
+      color: #000;
+      box-shadow: 0 10px 25px rgba(224, 183, 57, 0.5);
+    }
+
+    .prev-arrow { left: -15px; }
+    .next-arrow { right: -15px; }
+
+    .offers-slider-container {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      padding: 15px 5px 25px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold-main) var(--color-black);
+    }
+
+    .offers-slider-container::-webkit-scrollbar { height: 6px; }
+    .offers-slider-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 99px; }
+    .offers-slider-container::-webkit-scrollbar-thumb { background: var(--gold-main); border-radius: 99px; }
+
+    .deal-card {
+      width: 320px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .deal-image-wrap {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background: #000;
+      overflow: hidden;
+      border-top-left-radius: calc(var(--radius-card) - 1px);
+      border-top-right-radius: calc(var(--radius-card) - 1px);
+    }
+
+    .deal-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .deal-badge-left {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(14, 14, 18, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-main);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+    }
+
+    .deal-badge-right {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--gold-main);
+      color: #0A0A0C;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+    }
+
+    .deal-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .deal-location {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-text-subtle);
+      margin-bottom: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .deal-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--color-white);
+      margin-bottom: 12px;
+    }
+
+    .deal-specs-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .deal-specs-row span {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #DDD;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .deal-price-box {
+      background: #0A0A0E;
+      border: 1px solid rgba(224, 183, 57, 0.25);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .price-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--color-text-subtle);
+    }
+
+    .price-old { text-decoration: line-through; color: #777; }
+
+    .price-main-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2px;
+    }
+
+    .price-repasse-tag {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--gold-main);
+      letter-spacing: 0.05em;
+    }
+
+    .price-current {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--gold-main);
+    }
+
+    .price-economy {
+      font-size: 12px;
+      font-weight: 700;
+      color: #25D366;
+      text-align: right;
+      margin-top: 2px;
+    }
+
+    .deal-checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+      color: #DDD;
+    }
+
+    .deal-checklist li { display: flex; align-items: center; gap: 8px; }
+    .deal-checklist .check { color: var(--gold-main); font-weight: bold; }
+
+    .proximos-btn-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+
+    /* ==========================================================================
+       SECTION 4: 4 CARDS DE BENEFÍCIOS
+       ========================================================================== */
+    .benefits-section {
+      padding: 50px 0;
+      background: var(--color-black);
+    }
+
+    .benefits-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .benefit-card-4 {
+      padding: 30px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .benefit-icon { font-size: 26px; margin-bottom: 2px; }
+    .benefit-title { font-family: var(--font-heading); font-size: 19px; font-weight: 700; color: var(--color-white); }
+    .benefit-desc { font-family: var(--font-body); font-size: 13.5px; color: var(--color-text-subtle); line-height: 1.6; }
+
+    /* ==========================================================================
+       SECTION 5: PROVA SOCIAL SLIDER (10 CARDS)
+       ========================================================================== */
+    .social-proof-section {
+      padding: 60px 0;
+      background: var(--color-black);
+    }
+
+    .testimonials-slider-container {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      padding: 15px 5px 25px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold-main) var(--color-black);
+    }
+
+    .testimonials-slider-container::-webkit-scrollbar { height: 6px; }
+    .testimonials-slider-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 99px; }
+    .testimonials-slider-container::-webkit-scrollbar-thumb { background: var(--gold-main); border-radius: 99px; }
+
+    .testimonial-card {
+      width: 330px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .stars-row { color: var(--gold-main); font-size: 15px; letter-spacing: 2px; }
+    .testimonial-text { font-family: var(--font-body); font-size: 14px; color: #E2E2EC; line-height: 1.65; font-style: italic; }
+    .testimonial-author { font-size: 13px; font-weight: 700; color: var(--gold-main); margin-top: auto; }
+    .testimonial-author span { color: var(--color-text-subtle); font-weight: 400; }
+
+    /* ==========================================================================
+       SECTION 6: NÃO PERCA A PRÓXIMA OPORTUNIDADE & FOOTER
+       ========================================================================== */
+    .final-cta-section {
+      padding: 70px 0 40px;
+      text-align: center;
+      background: var(--color-black);
+    }
+
+    .final-headline {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 800;
+      color: var(--gold-main);
+      line-height: 1.18;
+      margin-bottom: 16px;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-subheadline {
+      font-family: var(--font-body);
+      font-size: clamp(14px, 1.8vw, 17px);
+      color: #D2D2DC;
+      max-width: 600px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    .btn-entrar-grupo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 42px;
+      background: var(--gold-main);
+      color: #0A0A0C;
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      border-radius: var(--radius-full);
+      border: none;
+      box-shadow: 0 10px 35px rgba(224, 183, 57, 0.45);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-entrar-grupo:hover {
+      background: var(--gold-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(224, 183, 57, 0.65);
+    }
+
+    .clean-footer {
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-logo-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--gold-border);
+      object-fit: contain;
+    }
+
+    .footer-copyright { font-size: 12px; color: var(--color-white); font-weight: 600; }
+    .footer-disclaimer { font-size: 11px; color: rgba(255, 255, 255, 0.4); max-width: 720px; line-height: 1.6; }
+
+    /* ==========================================================================
+       MODAL OVERLAY (OFFER DETAILS & WHATSAPP ACCESS)
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 4, 6, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content-card {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
+      background: #0D0D12;
+      border: 1px solid rgba(224, 183, 57, 0.4);
+      border-radius: 22px;
+      padding: 28px 22px 24px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(224, 183, 57, 0.25);
+      transform: scale(0.92) translateY(20px);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active .modal-content-card {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(224, 183, 57, 0.3);
+      color: var(--gold-main);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+
+    .modal-close-btn:hover {
+      background: var(--gold-main);
+      color: #000;
+      box-shadow: 0 0 15px rgba(224, 183, 57, 0.5);
+    }
+
+    .modal-badge-pill {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      color: var(--gold-main);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .modal-car-preview {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.8);
+    }
+
+    .modal-car-preview img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-car-info {
+      padding: 12px 14px;
+      background: rgba(14, 14, 18, 0.95);
+      text-align: left;
+    }
+
+    .modal-location { font-size: 11px; color: var(--color-text-subtle); display: block; margin-bottom: 2px; font-weight: 600; }
+    .modal-car-title { font-family: var(--font-heading); font-size: 16px; font-weight: 800; color: #FFF; margin-bottom: 4px; }
+    .modal-price-tag { font-size: 17px; font-weight: 900; color: var(--gold-main); }
+
+    .modal-body-text { margin-bottom: 20px; }
+    .modal-heading { font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: #FFF; margin-bottom: 6px; line-height: 1.35; }
+    .modal-desc { font-size: 12.5px; color: #BBB; line-height: 1.55; }
+    .modal-desc strong { color: var(--gold-main); font-weight: 600; }
+
+    .btn-modal-cta {
+      width: 100%;
+      padding: 16px 20px;
+      font-size: 13.5px;
+      margin-bottom: 10px;
+      box-shadow: 0 10px 30px rgba(224, 183, 57, 0.4);
+    }
+
+    .modal-subtext {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text-subtle);
+    }
+
+    /* Button inside Deal Card */
+    .deal-card {
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-card-ver-oferta {
+      width: 100%;
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: rgba(224, 183, 57, 0.12);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-full);
+      color: var(--gold-main);
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .deal-card:hover .btn-card-ver-oferta,
+    .btn-card-ver-oferta:hover {
+      background: var(--gold-main);
+      color: #000;
+      box-shadow: 0 6px 20px rgba(224, 183, 57, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       SECTION 1: HERO SECTION
+       ========================================================================== -->
+  <header class="hero-hero-wrapper">
+    <div class="container">
+      
+      <div class="hero-layout-left">
+        <div class="hero-content-box">
+          
+          <span class="pill-tagline">Comunidade VIP • WhatsApp</span>
+
+          <h1 class="hero-headline">
+            Carros premium até <highlight>50% abaixo</highlight> da FIPE. Todo dia, antes de todo mundo.
+          </h1>
+
+          <p class="hero-subheadline">
+            Repasses reais de Porsche, BMW, Range Rover e outros — com laudo aprovado, direto no seu WhatsApp. Gratuito.
+          </p>
+
+          <div class="google-pill">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            As melhores ofertas somem em minutos. Quem está dentro, compra primeiro.
+          </div>
+
+          <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-dds-gold">
+            QUERO ENTRAR NO GRUPO VIP
+          </a>
+
+          <span class="subtext-vagas">Gratuito • Vagas limitadas</span>
+
+          <div class="scroll-indicator" onclick="document.querySelector('.vip-benefits-section').scrollIntoView({behavior: 'smooth'})" aria-label="Rolar para baixo" title="Rolar para baixo">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ==========================================================================
+         SECTION 2: 3 CARDS DE VANTAGENS EXCLUSIVAS
+         ========================================================================== -->
+    <section class="vip-benefits-section">
+      <div class="section-header">
+        <div class="badge-pill-sm">
+          ✦ VANTAGENS EXCLUSIVAS ✦
+        </div>
+        <h2 class="section-title">Por que entrar na Comunidade VIP?</h2>
+      </div>
+
+      <div class="benefits-grid-3">
+        
+        <!-- Card 1 -->
+        <div class="benefit-card benefit-card-3">
+          <div class="benefit-icon-box">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <h3 class="benefit-title">Até 50% Abaixo da FIPE</h3>
+          <p class="benefit-desc">
+            Repasses reais de carros de alto padrão com descontos que concessionária nenhuma pratica.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="benefit-card benefit-card-3">
+          <div class="benefit-icon-box">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <h3 class="benefit-title">Laudo e Procedência Verificados</h3>
+          <p class="benefit-desc">
+            Cada carro passa pela nossa equipe antes de chegar no grupo. Você compra com segurança, sem surpresa.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="benefit-card benefit-card-3">
+          <div class="benefit-icon-box">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+            </svg>
+          </div>
+          <h3 class="benefit-title">Chega Direto no Seu WhatsApp</h3>
+          <p class="benefit-desc">
+            Sem app novo, sem cadastro. A oferta aparece no WhatsApp — você decide na hora.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 3: SLIDER MANUAL DE OFERTAS REAIS
+         ========================================================================== -->
+    <section class="offers-section">
+      <div class="section-header">
+        <div class="badge-pill-sm">
+          ✦ OFERTAS REAIS NA COMUNIDADE ✦
+        </div>
+        <h2 class="section-title">Isso é o que chega todo dia no grupo</h2>
+        <p style="color: var(--color-text-subtle); font-size: 14px; margin-top: 6px;">
+          Ofertas reais, publicadas diariamente. Os membros que estão dentro veem primeiro.
+        </p>
+      </div>
+
+      <!-- Manual Slider with Arrow Navigation -->
+      <div class="slider-outer-wrapper">
+        <button class="slider-arrow prev-arrow" onclick="scrollOffers(-1)" aria-label="Anterior">‹</button>
+        
+        <div class="offers-slider-container" id="offersSlider">
+          
+          <!-- Card 1: Audi Q8 Blindada -->
+          <div class="deal-card" onclick="openOfferModal(0)">
+            <div class="deal-image-wrap">
+              <span class="deal-badge-left">Blindagem Collet</span>
+              <span class="deal-badge-right">-15% FIPE</span>
+              <img src="assets/real_car_1_audi_q8.jpg" alt="Audi Q8 Blindada">
+            </div>
+            <div class="deal-body">
+              <div class="deal-location">📍 SÃO PAULO / SP</div>
+              <h3 class="deal-title">AUDI Q8 BLINDADA</h3>
+              
+              <div class="deal-specs-row">
+                <span>2025</span>
+                <span>25.000 km</span>
+                <span>Eixo Esterçante</span>
+                <span>Sakhir Gold</span>
+              </div>
+
+              <div class="deal-price-box">
+                <div class="price-top-row">
+                  <span class="price-label">FIPE (s/ blindar)</span>
+                  <span class="price-old">R$ 611.747</span>
+                </div>
+                <div class="price-main-row">
+                  <span class="price-repasse-tag">REPASSE</span>
+                  <span class="price-current">R$ 569.990</span>
+                </div>
+                <div class="price-economy">
+                  Menor Web Blindada: R$ 670.000
+                </div>
+              </div>
+
+              <ul class="deal-checklist">
+                <li><span class="check">✓</span> IPVA 2026 Pago</li>
+                <li><span class="check">✓</span> Vidros Protechtor EVO X</li>
+                <li><span class="check">✓</span> PPF FULL Aplicado</li>
+              </ul>
+
+              <button class="btn-card-ver-oferta" onclick="openOfferModal(0); event.stopPropagation();">
+                VER OFERTA NO GRUPO ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2: Range Rover Sport SVR -->
+          <div class="deal-card" onclick="openOfferModal(1)">
+            <div class="deal-image-wrap">
+              <span class="deal-badge-left">Carbon Edition</span>
+              <span class="deal-badge-right">-29% FIPE 🔥</span>
+              <img src="assets/real_car_2_range_rover_svr.jpg" alt="Range Rover Sport SVR">
+            </div>
+            <div class="deal-body">
+              <div class="deal-location">📍 SANTA CATARINA / SC</div>
+              <h3 class="deal-title">RANGE ROVER SPORT SVR 5.0 V8</h3>
+              
+              <div class="deal-specs-row">
+                <span>2022</span>
+                <span>28.000 km</span>
+                <span>Supercharged</span>
+                <span>Full PPF</span>
+              </div>
+
+              <div class="deal-price-box">
+                <div class="price-top-row">
+                  <span class="price-label">FIPE</span>
+                  <span class="price-old">R$ 706.595</span>
+                </div>
+                <div class="price-main-row">
+                  <span class="price-repasse-tag">REPASSE</span>
+                  <span class="price-current">R$ 499.900</span>
+                </div>
+                <div class="price-economy">
+                  Economia de R$ 206.695
+                </div>
+              </div>
+
+              <ul class="deal-checklist">
+                <li><span class="check">✓</span> IPVA 2026 Pago</li>
+                <li><span class="check">✓</span> Teto Solar Panorâmico</li>
+                <li><span class="check">✓</span> Toda Revisada na Land Rover</li>
+              </ul>
+
+              <button class="btn-card-ver-oferta" onclick="openOfferModal(1); event.stopPropagation();">
+                VER OFERTA NO GRUPO ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3: BMW X6 M Competition -->
+          <div class="deal-card" onclick="openOfferModal(2)">
+            <div class="deal-image-wrap">
+              <span class="deal-badge-left">PPF Frontal</span>
+              <span class="deal-badge-right">-20% FIPE</span>
+              <img src="assets/real_car_3_bmw_x6m.jpg" alt="BMW X6 M Competition">
+            </div>
+            <div class="deal-body">
+              <div class="deal-location">📍 SUDESTE</div>
+              <h3 class="deal-title">BMW X6 M COMPETITION</h3>
+              
+              <div class="deal-specs-row">
+                <span>2022</span>
+                <span>51.600 km</span>
+                <span>V8 Bi-Turbo</span>
+                <span>M Power</span>
+              </div>
+
+              <div class="deal-price-box">
+                <div class="price-top-row">
+                  <span class="price-label">FIPE</span>
+                  <span class="price-old">R$ 687.478</span>
+                </div>
+                <div class="price-main-row">
+                  <span class="price-repasse-tag">REPASSE</span>
+                  <span class="price-current">R$ 549.900</span>
+                </div>
+                <div class="price-economy">
+                  Economia de R$ 137.578
+                </div>
+              </div>
+
+              <ul class="deal-checklist">
+                <li><span class="check">✓</span> IPVA 2026 Pago</li>
+                <li><span class="check">✓</span> PPF Frontal Aplicado</li>
+                <li><span class="check">✓</span> Revisado na Concessionária</li>
+              </ul>
+
+              <button class="btn-card-ver-oferta" onclick="openOfferModal(2); event.stopPropagation();">
+                VER OFERTA NO GRUPO ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 4: Land Rover Defender 110x Dynamic HSE -->
+          <div class="deal-card" onclick="openOfferModal(3)">
+            <div class="deal-image-wrap">
+              <span class="deal-badge-left">PPF Full Fosco</span>
+              <span class="deal-badge-right">-16% FIPE</span>
+              <img src="assets/real_car_4_defender_110x.jpg" alt="Land Rover Defender 110x">
+            </div>
+            <div class="deal-body">
+              <div class="deal-location">📍 SÃO PAULO / SP</div>
+              <h3 class="deal-title">DEFENDER 110x DYNAMIC HSE</h3>
+              
+              <div class="deal-specs-row">
+                <span>2024</span>
+                <span>32.000 km</span>
+                <span>Dynamic HSE</span>
+                <span>PPF Fosco</span>
+              </div>
+
+              <div class="deal-price-box">
+                <div class="price-top-row">
+                  <span class="price-label">FIPE</span>
+                  <span class="price-old">R$ 642.000</span>
+                </div>
+                <div class="price-main-row">
+                  <span class="price-repasse-tag">REPASSE</span>
+                  <span class="price-current">R$ 539.990</span>
+                </div>
+                <div class="price-economy">
+                  Economia de R$ 102.010
+                </div>
+              </div>
+
+              <ul class="deal-checklist">
+                <li><span class="check">✓</span> IPVA 2026 Pago</li>
+                <li><span class="check">✓</span> PPF Full Fosco Exclusivo</li>
+                <li><span class="check">✓</span> Estado de Zero KM</li>
+              </ul>
+
+              <button class="btn-card-ver-oferta" onclick="openOfferModal(3); event.stopPropagation();">
+                VER OFERTA NO GRUPO ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 5: Volvo XC90 T8 Ult Dark -->
+          <div class="deal-card" onclick="openOfferModal(4)">
+            <div class="deal-image-wrap">
+              <span class="deal-badge-left">Blindada de Fábrica</span>
+              <span class="deal-badge-right">95K Margem 🔥</span>
+              <img src="assets/real_car_5_volvo_xc90.jpg" alt="Volvo XC90 T8 Ult Dark">
+            </div>
+            <div class="deal-body">
+              <div class="deal-location">📍 SÃO PAULO / SP</div>
+              <h3 class="deal-title">VOLVO XC90 T8 ULT DARK</h3>
+              
+              <div class="deal-specs-row">
+                <span>2023</span>
+                <span>111.000 km</span>
+                <span>Rodas 22"</span>
+                <span>Suspensão Ar</span>
+              </div>
+
+              <div class="deal-price-box">
+                <div class="price-top-row">
+                  <span class="price-label">FIPE (s/ blindar)</span>
+                  <span class="price-old">R$ 370.000</span>
+                </div>
+                <div class="price-main-row">
+                  <span class="price-repasse-tag">REPASSE</span>
+                  <span class="price-current">R$ 279.999</span>
+                </div>
+                <div class="price-economy">
+                  95K Margem + Blindagem Grátis
+                </div>
+              </div>
+
+              <ul class="deal-checklist">
+                <li><span class="check">✓</span> Blindagem de Fábrica com Teto</li>
+                <li><span class="check">✓</span> Todas as Revisões na Volvo</li>
+                <li><span class="check">✓</span> Paga Concessionária</li>
+              </ul>
+
+              <button class="btn-card-ver-oferta" onclick="openOfferModal(4); event.stopPropagation();">
+                VER OFERTA NO GRUPO ➔
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="slider-arrow next-arrow" onclick="scrollOffers(1)" aria-label="Próximo">›</button>
+      </div>
+
+      <!-- Button Directly Below Deals Slider -->
+      <div class="proximos-btn-wrap">
+        <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-dds-gold">
+          QUERO RECEBER AS PRÓXIMOS OFERTAS
+        </a>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 4: 4 CARDS DE BENEFÍCIOS
+         ========================================================================== -->
+    <section class="benefits-section">
+      <div class="benefits-grid-4">
+        
+        <!-- Card 1 -->
+        <div class="benefit-card benefit-card-4">
+          <div class="benefit-icon">🏎️</div>
+          <h3 class="benefit-title">Repasses Exclusivos</h3>
+          <p class="benefit-desc">
+            Carros de luxo que não aparecem no OLX, no iCarros, em lugar nenhum. Só aqui.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="benefit-card benefit-card-4">
+          <div class="benefit-icon">⚡</div>
+          <h3 class="benefit-title">Alertas na Hora</h3>
+          <p class="benefit-desc">
+            Novo carro no grupo, você é um dos primeiros a saber. Quem vê antes, compra melhor.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="benefit-card benefit-card-4">
+          <div class="benefit-icon">💰</div>
+          <h3 class="benefit-title">Economia Real e Calculada</h3>
+          <p class="benefit-desc">
+            Cada oferta já vem com o comparativo FIPE. Você vê exatamente quanto está economizando.
+          </p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="benefit-card benefit-card-4">
+          <div class="benefit-icon">🛡️</div>
+          <h3 class="benefit-title">Documentação Verificada</h3>
+          <p class="benefit-desc">
+            Laudo cautelar aprovado antes de publicar. Zero surpresa na hora de fechar.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 5: PROVA SOCIAL SLIDER (10 CARDS)
+         ========================================================================== -->
+    <section class="social-proof-section">
+      <div class="section-header">
+        <div class="badge-pill-sm">
+          ✦ PROVA SOCIAL ✦
+        </div>
+        <h2 class="section-title">Quem entrou, comprou bem</h2>
+        <p style="color: var(--color-text-subtle); font-size: 14px; margin-top: 6px;">
+          Resultados reais de quem já estava dentro quando a oportunidade apareceu.
+        </p>
+      </div>
+
+      <!-- Manual Testimonial Slider with Arrow Navigation -->
+      <div class="slider-outer-wrapper">
+        <button class="slider-arrow prev-arrow" onclick="scrollTestimonials(-1)" aria-label="Anterior">‹</button>
+
+        <div class="testimonials-slider-container" id="testimonialsSlider">
+          
+          <!-- Testimonial 1 -->
+          <div class="testimonial-card">
+            <div class="stars-row">★★★★★</div>
+            <p class="testimonial-text">
+              "Peguei uma Cayenne Turbo GT bem abaixo da FIPE logo nas primeiras semanas no grupo. A agilidade nos alertas faz toda a diferença."
+            </p>
+            <div class="testimonial-author">
+              Rafael M. <span>· Contagem / MG</span>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="testimonial-card">
+            <div class="stars-row">★★★★★</div>
+            <p class="testimonial-text">
+              "Fechei meu M3 Competition com uma margem surreal que não achei em lugar nenhum. Documentação e cautelar 100% certinhas."
+            </p>
+            <div class="testimonial-author">
+              Juliana S. <span>· Belo Horizonte / MG</span>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="testimonial-card">
+            <div class="stars-row">★★★★★</div>
+            <p class="testimonial-text">
+              "Trabalho com investimento automotivo e hoje a comunidade da DDS é minha principal fonte de repasse. Chega carro bom todo dia."
+            </p>
+            <div class="testimonial-author">
+              Diego A. <span>· Betim / MG</span>
+            </div>
+          </div>
+
+          <!-- Testimonial 4 -->
+          <div class="testimonial-card">
+            <div class="stars-row">★★★★★</div>
+            <p class="testimonial-text">
+              "Economizei mais de 120 mil reais na compra de uma Range Rover Sport SVR. A curadoria da DDS é impecável do início ao fim."
+            </p>
+            <div class="testimonial-author">
+              Lucas P. <span>· São Paulo / SP</span>
+            </div>
+          </div>
+
+          <!-- Testimonial 5 -->
+          <div class="testimonial-card">
+            <div class="stars-row">★★★★★</div>
+            <p class="testimonial-text">
+              "As ofertas saem muito rápido, tem que ficar ligado no grupo! Consegui arrematar um Porsche 911 no repasse direto da concessionária."
+            </p>
+            <div class="testimonial-author">
+              Bruno K. <span>· Curitiba / PR</span>
+            </div>
+          </div>
+
+          <!-- Testimonial 6 -->
+          <div class="testimonial-card">
+            <div class="stars-row">★★★★★</div>
+            <p class="testimonial-text">
+              "Melhor grupo de oportunidades que já participei. Tudo transparente, sem intermediários estranhos ou surpresas na documentação."
+            </p>
+            <div class="testimonial-author">
+              Camila R. <span>· Rio de Janeiro / RJ</span>
+            </div>
+          </div>
+
+          <!-- Testimonial 7 -->
+          <div class="testimonial-card">
+            <div class="stars-row">★★★★★</div>
+            <p class="testimonial-text">
+              "Comprei uma BMW M3 para revenda e obtive um retorno excelente em menos de 15 dias. Recomendo a Comunidade DDS de olhos fechados."
+            </p>
+            <div class="testimonial-author">
+              Marcelo T. <span>· Brasília / DF</span>
+            </div>
+          </div>
+
+          <!-- Testimonial 8 -->
+          <div class="testimonial-card">
+            <div class="stars-row">★★★★★</div>
+            <p class="testimonial-text">
+              "O atendimento concierge e a facilidade de receber tudo direto no WhatsApp tornam o processo simples e 100% confiável."
+            </p>
+            <div class="testimonial-author">
+              Felipe H. <span>· Campinas / SP</span>
+            </div>
+          </div>
+
+          <!-- Testimonial 9 -->
+          <div class="testimonial-card">
+            <div class="stars-row">★★★★★</div>
+            <p class="testimonial-text">
+              "Impressionado com a margem dos veículos divulgados. Já indiquei para 3 amigos investidores que também entraram no grupo VIP."
+            </p>
+            <div class="testimonial-author">
+              Gustavo N. <span>· Porto Alegre / RS</span>
+            </div>
+          </div>
+
+          <!-- Testimonial 10 -->
+          <div class="testimonial-card">
+            <div class="stars-row">★★★★★</div>
+            <p class="testimonial-text">
+              "Já é o segundo carro de luxo que compro através do grupo VIP. Para quem busca valor de oportunidade real, não existe igual no Brasil."
+            </p>
+            <div class="testimonial-author">
+              Rodrigo B. <span>· Salvador / BA</span>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="slider-arrow next-arrow" onclick="scrollTestimonials(1)" aria-label="Próximo">›</button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 6: NÃO PERCA A PRÓXIMA OPORTUNIDADE & FOOTER
+         ========================================================================== -->
+    <section class="final-cta-section">
+      <h2 class="final-headline">
+        O próximo repasse chega hoje. Você vai estar dentro?
+      </h2>
+
+      <p class="final-subheadline">
+        Os melhores carros somem em minutos. Entre agora, é gratuito.
+      </p>
+
+      <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-entrar-grupo">
+        ENTRAR NO GRUPO — É GRATUITO
+      </a>
+
+      <!-- Minimalist Footer -->
+      <footer class="clean-footer">
+        <img src="assets/official_dds_logo.jpg" alt="DDS Logo" class="footer-logo-badge">
+        
+        <div class="footer-copyright">
+          © 2026 Drive Dream Sales · Todos os direitos reservados
+        </div>
+
+        <p class="footer-disclaimer">
+          Contato: . Os valores de FIPE e repasse são referência e podem variar conforme disponibilidade e negociação. Ao se cadastrar você concorda em receber contato pelo WhatsApp. Respeitamos a LGPD — seus dados não são compartilhados com terceiros.
+        </p>
+      </footer>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       MODAL POPUP OVERLAY (OFFER DETAILS & WHATSAPP ACCESS)
+       ========================================================================== -->
+  <div class="modal-overlay" id="offerModal" onclick="closeOfferModal(event)">
+    <div class="modal-content-card" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeOfferModal(event)" aria-label="Fechar">✕</button>
+      
+      <div class="modal-badge-pill">✦ OPORTUNIDADE EXCLUSIVA VIP ✦</div>
+      
+      <div class="modal-car-preview">
+        <img id="modalCarImg" src="" alt="Veículo">
+        <div class="modal-car-info">
+          <span class="modal-location" id="modalCarLoc">📍 SÃO PAULO / SP</span>
+          <h3 class="modal-car-title" id="modalCarTitle">AUDI Q8 BLINDADA</h3>
+          <div class="modal-price-tag" id="modalCarPrice">R$ 569.990</div>
+        </div>
+      </div>
+
+      <div class="modal-body-text">
+        <p class="modal-desc">
+          Esta oferta exclusiva foi publicada recentemente para os membros da nossa <strong>Comunidade VIP do WhatsApp</strong>. Entre agora gratuitamente para garantir o seu acesso!
+        </p>
+      </div>
+
+      <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-dds-gold btn-modal-cta">
+        VER ESTA OFERTA NO WHATSAPP
+      </a>
+
+      <div class="modal-subtext">
+        Gratuito • Acesso Imediato • Vagas Limitadas
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const offersData = [
+      {
+        title: 'AUDI Q8 BLINDADA',
+        location: '📍 SÃO PAULO / SP',
+        price: 'R$ 569.990',
+        img: 'assets/real_car_1_audi_q8.jpg'
+      },
+      {
+        title: 'RANGE ROVER SPORT SVR 5.0 V8',
+        location: '📍 SANTA CATARINA / SC',
+        price: 'R$ 499.900',
+        img: 'assets/real_car_2_range_rover_svr.jpg'
+      },
+      {
+        title: 'BMW X6 M COMPETITION',
+        location: '📍 SUDESTE',
+        price: 'R$ 549.900',
+        img: 'assets/real_car_3_bmw_x6m.jpg'
+      },
+      {
+        title: 'DEFENDER 110x DYNAMIC HSE',
+        location: '📍 SÃO PAULO / SP',
+        price: 'R$ 539.990',
+        img: 'assets/real_car_4_defender_110x.jpg'
+      },
+      {
+        title: 'VOLVO XC90 T8 ULT DARK',
+        location: '📍 SÃO PAULO / SP',
+        price: 'R$ 279.999',
+        img: 'assets/real_car_5_volvo_xc90.jpg'
+      }
+    ];
+
+    function openOfferModal(index) {
+      const data = offersData[index];
+      if (!data) return;
+      document.getElementById('modalCarImg').src = data.img;
+      document.getElementById('modalCarImg').alt = data.title;
+      document.getElementById('modalCarLoc').textContent = data.location;
+      document.getElementById('modalCarTitle').textContent = data.title;
+      document.getElementById('modalCarPrice').textContent = data.price;
+
+      document.getElementById('offerModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeOfferModal(e) {
+      if (e) e.stopPropagation();
+      document.getElementById('offerModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function scrollOffers(direction) {
+      const container = document.getElementById('offersSlider');
+      const scrollAmount = 340;
+      container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+
+    function scrollTestimonials(direction) {
+      const container = document.getElementById('testimonialsSlider');
+      const scrollAmount = 350;
+      container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
