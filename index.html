@@ -143,41 +143,60 @@
     }
 
     /* ==========================================================================
-       UNCLIPPER CARD ANIMATION (FULL 360° SWEEP AROUND ENTIRE PERIMETER)
+       DDS DESIGN SYSTEM - UNIVERSAL 360° GLOWING BORDER ANIMATION (PC & MOBILE)
        ========================================================================== */
+    @keyframes rotateGlowBorder {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     .benefit-card, .deal-card, .testimonial-card {
       position: relative;
       background: var(--color-card-bg);
       border-radius: var(--radius-card);
-      transition: all 0.4s ease;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+      overflow: hidden;
       z-index: 1;
+      border: 1px solid rgba(224, 183, 57, 0.2);
     }
 
     .benefit-card::before, .deal-card::before, .testimonial-card::before {
       content: '';
       position: absolute;
-      inset: -2px;
-      border-radius: calc(var(--radius-card) + 2px);
-      padding: 2px;
-      background: conic-gradient(from var(--border-angle), transparent 25%, rgba(224, 183, 57, 0.3) 65%, var(--gold-main) 92%, #FFFFFF 100%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0%,
+        transparent 65%,
+        rgba(224, 183, 57, 0.4) 80%,
+        var(--gold-main) 95%,
+        #FFFFFF 100%
+      );
+      animation: rotateGlowBorder 3s linear infinite;
+      z-index: -2;
+      opacity: 0.9;
     }
 
-    .benefit-card:hover::before, .deal-card:hover::before, .testimonial-card:hover::before {
-      opacity: 1;
-      animation: rotateBorder 1.8s linear infinite;
+    .benefit-card::after, .deal-card::after, .testimonial-card::after {
+      content: '';
+      position: absolute;
+      inset: 1.5px;
+      background: var(--color-card-bg);
+      border-radius: calc(var(--radius-card) - 1.5px);
+      z-index: -1;
+      transition: background 0.3s ease;
+    }
+
+    .benefit-card:hover::after, .deal-card:hover::after, .testimonial-card:hover::after {
+      background: var(--color-card-hover);
     }
 
     .benefit-card:hover, .deal-card:hover, .testimonial-card:hover {
-      background: var(--color-card-hover);
       transform: translateY(-5px);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.9), 0 0 25px rgba(224, 183, 57, 0.22);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.9), 0 0 25px rgba(224, 183, 57, 0.3);
     }
 
     /* ==========================================================================
@@ -1646,7 +1665,7 @@
       </p>
 
       <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-entrar-grupo">
-        ENTRAR NO GRUPO — É GRATUITO
+        ENTRAR NO GRUPO, É GRATUITO
       </a>
 
       <!-- Minimalist Footer -->
