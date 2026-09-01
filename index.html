@@ -851,43 +851,284 @@
     .benefit-desc { font-family: var(--font-body); font-size: 13.5px; color: var(--color-text-subtle); line-height: 1.6; }
 
     /* ==========================================================================
-       SECTION 5: PROVA SOCIAL SLIDER (10 CARDS)
+       SECTION 5: PROVA SOCIAL EM VÍDEO (IPHONE 16 PRO MOCKUPS)
        ========================================================================== */
     .social-proof-section {
-      padding: 60px 0;
+      padding: 70px 0 80px;
       background: var(--color-black);
+      position: relative;
     }
 
-    .testimonials-slider-container {
-      display: flex;
-      gap: 24px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      scroll-snap-type: x mandatory;
-      padding: 15px 5px 25px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--gold-main) var(--color-black);
+    .video-testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1080px;
+      margin: 40px auto 0;
+      padding: 10px 0;
     }
 
-    .testimonials-slider-container::-webkit-scrollbar { height: 6px; }
-    .testimonials-slider-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 99px; }
-    .testimonials-slider-container::-webkit-scrollbar-thumb { background: var(--gold-main); border-radius: 99px; }
-
-    .testimonial-card {
-      width: 330px;
-      flex-shrink: 0;
-      scroll-snap-align: start;
-      padding: 28px 24px;
+    .iphone-mockup-card {
+      position: relative;
+      width: 100%;
+      max-width: 330px;
+      margin: 0 auto;
+      aspect-ratio: 9 / 19;
+      background: #09090b;
+      border-radius: 46px;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+      z-index: 1;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      cursor: pointer;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(224, 183, 57, 0.18);
+    }
+
+    .iphone-mockup-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0%,
+        transparent 65%,
+        rgba(224, 183, 57, 0.45) 80%,
+        var(--gold-main) 95%,
+        #FFFFFF 100%
+      );
+      animation: rotateGlowBorder 2s linear infinite;
+      z-index: -2;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .iphone-mockup-card::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      background: #09090b;
+      border-radius: 44px;
+      z-index: -1;
+      transition: background 0.3s ease;
+      pointer-events: none;
+    }
+
+    /* Rotate golden loading border ONLY when video is PLAYING */
+    .iphone-mockup-card.is-playing::before {
+      opacity: 1;
+    }
+
+    .iphone-mockup-card.is-playing {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95), 0 0 45px rgba(224, 183, 57, 0.45);
+      border-color: rgba(224, 183, 57, 0.45);
+    }
+
+    /* Dynamic Island Notch */
+    .iphone-dynamic-island {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 22px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 15;
+      box-shadow: 0 0 4px rgba(0,0,0,0.8);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 8px;
+    }
+
+    .iphone-camera-lens {
+      width: 10px;
+      height: 10px;
+      background: #0d0d12;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    /* Screen Container & Video */
+    .iphone-screen {
+      position: relative;
+      width: calc(100% - 14px);
+      height: calc(100% - 14px);
+      margin: 7px auto;
+      border-radius: 38px;
+      overflow: hidden;
+      background: #000;
+      z-index: 2;
+    }
+
+    .iphone-screen video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Play / Pause Toggle Button Overlay */
+    .video-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.25);
+      transition: background 0.3s ease;
+      z-index: 5;
+    }
+
+    .video-play-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(12, 12, 16, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1.5px solid var(--gold-main);
+      color: var(--gold-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 0 25px rgba(224, 183, 57, 0.4);
+      transition: all 0.25s ease;
+    }
+
+    .iphone-mockup-card:hover .video-play-btn {
+      transform: scale(1.1);
+      background: var(--gold-main);
+      color: #000;
+      box-shadow: 0 0 35px rgba(224, 183, 57, 0.7);
+    }
+
+    .iphone-mockup-card.is-playing .video-play-overlay {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .iphone-mockup-card.is-playing:hover .video-play-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Floating Glassmorphic Testimonial Overlay Card */
+    .video-overlay-card {
+      position: absolute;
+      bottom: 12px;
+      left: 10px;
+      right: 10px;
+      background: rgba(10, 10, 14, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(224, 183, 57, 0.35);
+      border-radius: 20px;
+      padding: 12px 14px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      z-index: 10;
       text-align: left;
     }
 
-    .stars-row { color: var(--gold-main); font-size: 15px; letter-spacing: 2px; }
-    .testimonial-text { font-family: var(--font-body); font-size: 14px; color: #E2E2EC; line-height: 1.65; font-style: italic; }
-    .testimonial-author { font-size: 13px; font-weight: 700; color: var(--gold-main); margin-top: auto; }
-    .testimonial-author span { color: var(--color-text-subtle); font-weight: 400; }
+    .video-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .video-card-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-main), #8A6D15);
+      color: #000;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(224, 183, 57, 0.4);
+      overflow: hidden;
+    }
+
+    .video-card-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ig-verified-badge {
+      display: inline-block;
+      vertical-align: sub;
+      margin-left: 4px;
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
+    .video-card-user-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .video-card-name {
+      font-family: var(--font-heading);
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #FFF;
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+    }
+
+    .video-card-role {
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      color: var(--gold-main);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .video-card-stars {
+      color: var(--gold-main);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      margin-top: 3px;
+    }
+
+    @media (max-width: 991px) {
+      .social-proof-section {
+        padding: 50px 0 40px !important;
+        overflow: hidden;
+      }
+      .video-testimonials-grid {
+        display: flex !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 18px !important;
+        padding: 25px 20px 40px !important;
+        scrollbar-width: none !important;
+        margin-top: 20px !important;
+      }
+      .video-testimonials-grid::-webkit-scrollbar { display: none !important; }
+      .iphone-mockup-card {
+        flex: 0 0 290px !important;
+        scroll-snap-align: center !important;
+        margin: 0 !important;
+      }
+    }
 
     /* ==========================================================================
        SECTION 6: NÃO PERCA A PRÓXIMA OPORTUNIDADE & FOOTER
@@ -1532,138 +1773,120 @@
     </section>
 
     <!-- ==========================================================================
-         SECTION 5: PROVA SOCIAL SLIDER (10 CARDS)
+         SECTION 5: PROVA SOCIAL EM VÍDEO (IPHONE 16 PRO MOCKUPS)
          ========================================================================== -->
     <section class="social-proof-section">
       <div class="section-header">
         <div class="badge-pill-sm">
-          ✦ PROVA SOCIAL ✦
+          ✦ PROVA SOCIAL VIP ✦
         </div>
-        <h2 class="section-title">Quem entrou, comprou bem</h2>
+        <h2 class="section-title">Quem conhece, recomenda a DDS</h2>
         <p style="color: var(--color-text-subtle); font-size: 14px; margin-top: 6px;">
-          Resultados reais de quem já estava dentro quando a oportunidade apareceu.
+          Depoimentos reais de grandes parceiros e membros da nossa Comunidade VIP.
         </p>
       </div>
 
-      <!-- Manual Testimonial Slider with Arrow Navigation -->
-      <div class="slider-outer-wrapper">
-        <button class="slider-arrow prev-arrow" onclick="scrollTestimonials(-1)" aria-label="Anterior">‹</button>
+      <div class="video-testimonials-grid">
+        
+        <!-- Video 1: Lulinha -->
+        <div class="iphone-mockup-card" onclick="toggleVideoPlay(this)">
+          <div class="iphone-dynamic-island">
+            <div class="iphone-camera-lens"></div>
+          </div>
+          <div class="iphone-screen">
+            <video playsinline loop preload="metadata" src="https://exxankcivexqbqonizmu.supabase.co/storage/v1/object/sign/vd%20jg/WhatsApp%20Video%202026-07-06%20at%2023.15.47%20(1).mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8wNWM5YjVjZi0wZjU2LTQ0ZTMtOWRhMS0wMjAxNzIwY2Q4M2UiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ2ZCBqZy9XaGF0c0FwcCBWaWRlbyAyMDI2LTA3LTA2IGF0IDIzLjE1LjQ3ICgxKS5tcDQiLCJzY29wZSI6ImRvd25sb2FkIiwiaWF0IjoxNzg0MTI2NDgwLCJleHAiOjE5NDE4MDY0ODB9.QLdX_eV808_yAtqIj0dToGZ9N2lgAvINaACy6QvWBk0"></video>
+            
+            <div class="video-play-overlay">
+              <div class="video-play-btn">▶</div>
+            </div>
 
-        <div class="testimonials-slider-container" id="testimonialsSlider">
-          
-          <!-- Testimonial 1 -->
-          <div class="testimonial-card">
-            <div class="stars-row">★★★★★</div>
-            <p class="testimonial-text">
-              "Peguei uma Cayenne Turbo GT bem abaixo da FIPE logo nas primeiras semanas no grupo. A agilidade nos alertas faz toda a diferença."
-            </p>
-            <div class="testimonial-author">
-              Rafael M. <span>· Contagem / MG</span>
+            <div class="video-overlay-card">
+              <div class="video-card-header">
+                <div class="video-card-avatar">
+                  <img src="assets/avatar_lulinha.jpg" alt="@lulinhamarquees">
+                </div>
+                <div class="video-card-user-info">
+                  <div class="video-card-name">
+                    @lulinhamarquees
+                    <svg class="ig-verified-badge" viewBox="0 0 24 24">
+                      <path fill="#0095F6" d="M12 2l2.4 1.8 3-0.3 0.9 2.9 2.8 1.1-0.7 2.9 2.1 2.2-2.1 2.2 0.7 2.9-2.8 1.1-0.9 2.9-3-0.3L12 22l-2.4-1.8-3 0.3-0.9-2.9-2.8-1.1 0.7-2.9-2.1-2.2 2.1-2.2-0.7-2.9 2.8-1.1 0.9-2.9 3 0.3L12 2z"/>
+                      <path fill="#FFFFFF" d="M9.8 15.6l-3.3-3.3 1.4-1.4 1.9 1.9 5.8-5.8 1.4 1.4z"/>
+                    </svg>
+                  </div>
+                  <div class="video-card-role">Cantor</div>
+                  <div class="video-card-stars">★★★★★</div>
+                </div>
+              </div>
             </div>
           </div>
-
-          <!-- Testimonial 2 -->
-          <div class="testimonial-card">
-            <div class="stars-row">★★★★★</div>
-            <p class="testimonial-text">
-              "Fechei meu M3 Competition com uma margem surreal que não achei em lugar nenhum. Documentação e cautelar 100% certinhas."
-            </p>
-            <div class="testimonial-author">
-              Juliana S. <span>· Belo Horizonte / MG</span>
-            </div>
-          </div>
-
-          <!-- Testimonial 3 -->
-          <div class="testimonial-card">
-            <div class="stars-row">★★★★★</div>
-            <p class="testimonial-text">
-              "Trabalho com investimento automotivo e hoje a comunidade da DDS é minha principal fonte de repasse. Chega carro bom todo dia."
-            </p>
-            <div class="testimonial-author">
-              Diego A. <span>· Betim / MG</span>
-            </div>
-          </div>
-
-          <!-- Testimonial 4 -->
-          <div class="testimonial-card">
-            <div class="stars-row">★★★★★</div>
-            <p class="testimonial-text">
-              "Economizei mais de 120 mil reais na compra de uma Range Rover Sport SVR. A curadoria da DDS é impecável do início ao fim."
-            </p>
-            <div class="testimonial-author">
-              Lucas P. <span>· São Paulo / SP</span>
-            </div>
-          </div>
-
-          <!-- Testimonial 5 -->
-          <div class="testimonial-card">
-            <div class="stars-row">★★★★★</div>
-            <p class="testimonial-text">
-              "As ofertas saem muito rápido, tem que ficar ligado no grupo! Consegui arrematar um Porsche 911 no repasse direto da concessionária."
-            </p>
-            <div class="testimonial-author">
-              Bruno K. <span>· Curitiba / PR</span>
-            </div>
-          </div>
-
-          <!-- Testimonial 6 -->
-          <div class="testimonial-card">
-            <div class="stars-row">★★★★★</div>
-            <p class="testimonial-text">
-              "Melhor grupo de oportunidades que já participei. Tudo transparente, sem intermediários estranhos ou surpresas na documentação."
-            </p>
-            <div class="testimonial-author">
-              Camila R. <span>· Rio de Janeiro / RJ</span>
-            </div>
-          </div>
-
-          <!-- Testimonial 7 -->
-          <div class="testimonial-card">
-            <div class="stars-row">★★★★★</div>
-            <p class="testimonial-text">
-              "Comprei uma BMW M3 para revenda e obtive um retorno excelente em menos de 15 dias. Recomendo a Comunidade DDS de olhos fechados."
-            </p>
-            <div class="testimonial-author">
-              Marcelo T. <span>· Brasília / DF</span>
-            </div>
-          </div>
-
-          <!-- Testimonial 8 -->
-          <div class="testimonial-card">
-            <div class="stars-row">★★★★★</div>
-            <p class="testimonial-text">
-              "O atendimento concierge e a facilidade de receber tudo direto no WhatsApp tornam o processo simples e 100% confiável."
-            </p>
-            <div class="testimonial-author">
-              Felipe H. <span>· Campinas / SP</span>
-            </div>
-          </div>
-
-          <!-- Testimonial 9 -->
-          <div class="testimonial-card">
-            <div class="stars-row">★★★★★</div>
-            <p class="testimonial-text">
-              "Impressionado com a margem dos veículos divulgados. Já indiquei para 3 amigos investidores que também entraram no grupo VIP."
-            </p>
-            <div class="testimonial-author">
-              Gustavo N. <span>· Porto Alegre / RS</span>
-            </div>
-          </div>
-
-          <!-- Testimonial 10 -->
-          <div class="testimonial-card">
-            <div class="stars-row">★★★★★</div>
-            <p class="testimonial-text">
-              "Já é o segundo carro de luxo que compro através do grupo VIP. Para quem busca valor de oportunidade real, não existe igual no Brasil."
-            </p>
-            <div class="testimonial-author">
-              Rodrigo B. <span>· Salvador / BA</span>
-            </div>
-          </div>
-
         </div>
 
-        <button class="slider-arrow next-arrow" onclick="scrollTestimonials(1)" aria-label="Próximo">›</button>
+        <!-- Video 2: Iguinho -->
+        <div class="iphone-mockup-card" onclick="toggleVideoPlay(this)">
+          <div class="iphone-dynamic-island">
+            <div class="iphone-camera-lens"></div>
+          </div>
+          <div class="iphone-screen">
+            <video playsinline loop preload="metadata" src="https://exxankcivexqbqonizmu.supabase.co/storage/v1/object/sign/vd%20jg/WhatsApp%20Video%202026-07-06%20at%2023.15.47%20(6)%20(1).mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8wNWM5YjVjZi0wZjU2LTQ0ZTMtOWRhMS0wMjAxNzIwY2Q4M2UiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ2ZCBqZy9XaGF0c0FwcCBWaWRlbyAyMDI2LTA3LTA2IGF0IDIzLjE1LjQ3ICg2KSAoMSkubXA0Iiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4NDEyNzI3MywiZXhwIjoxOTQxODA3MjczfQ.zOZITwC0gkl0LGAxM-awIo9OhYka9qv3AKdXgF12F3A"></video>
+
+            <div class="video-play-overlay">
+              <div class="video-play-btn">▶</div>
+            </div>
+
+            <div class="video-overlay-card">
+              <div class="video-card-header">
+                <div class="video-card-avatar">
+                  <img src="assets/avatar_iguinho.jpg" alt="@iguinho_marquees">
+                </div>
+                <div class="video-card-user-info">
+                  <div class="video-card-name">
+                    @iguinho_marquees
+                    <svg class="ig-verified-badge" viewBox="0 0 24 24">
+                      <path fill="#0095F6" d="M12 2l2.4 1.8 3-0.3 0.9 2.9 2.8 1.1-0.7 2.9 2.1 2.2-2.1 2.2 0.7 2.9-2.8 1.1-0.9 2.9-3-0.3L12 22l-2.4-1.8-3 0.3-0.9-2.9-2.8-1.1 0.7-2.9-2.1-2.2 2.1-2.2-0.7-2.9 2.8-1.1 0.9-2.9 3 0.3L12 2z"/>
+                      <path fill="#FFFFFF" d="M9.8 15.6l-3.3-3.3 1.4-1.4 1.9 1.9 5.8-5.8 1.4 1.4z"/>
+                    </svg>
+                  </div>
+                  <div class="video-card-role">Cantor</div>
+                  <div class="video-card-stars">★★★★★</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 3: Carolina Youssef -->
+        <div class="iphone-mockup-card" onclick="toggleVideoPlay(this)">
+          <div class="iphone-dynamic-island">
+            <div class="iphone-camera-lens"></div>
+          </div>
+          <div class="iphone-screen">
+            <video playsinline loop preload="metadata" src="https://exxankcivexqbqonizmu.supabase.co/storage/v1/object/sign/vd%20jg/WhatsApp%20Video%202026-07-06%20at%2023.15.47%20(4).mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8wNWM5YjVjZi0wZjU2LTQ0ZTMtOWRhMS0wMjAxNzIwY2Q4M2UiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJ2ZCBqZy9XaGF0c0FwcCBWaWRlbyAyMDI2LTA3LTA2IGF0IDIzLjE1LjQ3ICg0KS5tcDQiLCJzY29wZSI6ImRvd25sb2FkIiwiaWF0IjoxNzg0MTI2ODAwLCJleHAiOjE5NDE4MDY4MDB9.oboP03zIyZaNDylt69lf71DrYjasNxEqllP1QNgomJc"></video>
+
+            <div class="video-play-overlay">
+              <div class="video-play-btn">▶</div>
+            </div>
+
+            <div class="video-overlay-card">
+              <div class="video-card-header">
+                <div class="video-card-avatar">
+                  <img src="assets/avatar_carolina.jpg" alt="@carolinayoussef_in_dubai">
+                </div>
+                <div class="video-card-user-info">
+                  <div class="video-card-name">
+                    @carolinayoussef_in_dubai
+                    <svg class="ig-verified-badge" viewBox="0 0 24 24">
+                      <path fill="#0095F6" d="M12 2l2.4 1.8 3-0.3 0.9 2.9 2.8 1.1-0.7 2.9 2.1 2.2-2.1 2.2 0.7 2.9-2.8 1.1-0.9 2.9-3-0.3L12 22l-2.4-1.8-3 0.3-0.9-2.9-2.8-1.1 0.7-2.9-2.1-2.2 2.1-2.2-0.7-2.9 2.8-1.1 0.9-2.9 3 0.3L12 2z"/>
+                      <path fill="#FFFFFF" d="M9.8 15.6l-3.3-3.3 1.4-1.4 1.9 1.9 5.8-5.8 1.4 1.4z"/>
+                    </svg>
+                  </div>
+                  <div class="video-card-role">Influencer</div>
+                  <div class="video-card-stars">★★★★★</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -1672,11 +1895,11 @@
          ========================================================================== -->
     <section class="final-cta-section">
       <h2 class="final-headline">
-        O próximo repasse chega hoje. Você vai estar dentro?
+        O próximo carro pode ser exatamente o que você procura.
       </h2>
 
       <p class="final-subheadline">
-        Os melhores carros somem em minutos. Entre agora, é gratuito.
+        Mas só quem está dentro vai ver. Entre agora, é gratuito.
       </p>
 
       <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-entrar-grupo">
@@ -1792,14 +2015,31 @@
       container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
     }
 
-    function scrollTestimonials(direction) {
-      const container = document.getElementById('testimonialsSlider');
-      const scrollAmount = 350;
-      container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    function toggleVideoPlay(card) {
+      const video = card.querySelector('video');
+      const btn = card.querySelector('.video-play-btn');
+      if (!video) return;
+
+      if (video.paused) {
+        document.querySelectorAll('.iphone-mockup-card video').forEach(v => {
+          v.pause();
+          v.closest('.iphone-mockup-card').classList.remove('is-playing');
+          const otherBtn = v.closest('.iphone-mockup-card').querySelector('.video-play-btn');
+          if (otherBtn) otherBtn.textContent = '▶';
+        });
+
+        video.play();
+        card.classList.add('is-playing');
+        if (btn) btn.textContent = '❚❚';
+      } else {
+        video.pause();
+        card.classList.remove('is-playing');
+        if (btn) btn.textContent = '▶';
+      }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      const cards = document.querySelectorAll('.benefit-card, .deal-card, .testimonial-card');
+      const cards = document.querySelectorAll('.benefit-card, .deal-card, .iphone-mockup-card');
       cards.forEach(card => {
         card.addEventListener('touchstart', () => {
           cards.forEach(c => c.classList.remove('active-touch'));
