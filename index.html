@@ -2086,12 +2086,14 @@
       }
 
       if (typeof fbq === 'function') {
+        fbq('track', 'CompleteRegistration', eventParams);
         fbq('track', 'Lead', eventParams);
         fbq('track', 'Contact', eventParams);
+        fbq('trackCustom', 'EntrouComunidade', eventParams);
         fbq('trackCustom', 'WhatsAppClick', eventParams);
       }
       
-      console.log('[Meta Ads Pixel] Lead & Contact rastreado com sucesso:', eventParams);
+      console.log('[Meta Ads Pixel] Eventos de conversao disparados:', eventParams);
     }
 
     function closeOfferModal(e) {
