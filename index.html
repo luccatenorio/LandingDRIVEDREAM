@@ -11,6 +11,28 @@
   <link rel="shortcut icon" type="image/jpeg" href="assets/official_dds_logo.jpg">
   <link rel="apple-touch-icon" href="assets/official_dds_logo.jpg">
   
+  <!-- Meta Ads Pixel Code -->
+  <script>
+    window.META_PIXEL_ID = '1580432243396646'; // ID Oficial Novo (BM João Gomes): PIXEL 02 DDS - LANDING PAGE
+    
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    
+    fbq('init', window.META_PIXEL_ID);
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=1580432243396646&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Ads Pixel Code -->
+  
   <!-- Premium Google Fonts: Outfit & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1431,7 +1453,7 @@
             As melhores ofertas somem em minutos. Quem está dentro, compra primeiro.
           </div>
 
-          <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-dds-gold">
+          <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-dds-gold" id="btn-whatsapp-hero" data-location="Hero" onclick="trackWhatsAppClick(event, 'Hero')">
             QUERO ENTRAR NO GRUPO VIP
           </a>
 
@@ -1753,7 +1775,7 @@
 
       <!-- Button Directly Below Deals Slider -->
       <div class="proximos-btn-wrap">
-        <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-dds-gold">
+        <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-dds-gold" id="btn-whatsapp-ofertas" data-location="Ofertas Slider" onclick="trackWhatsAppClick(event, 'Ofertas Slider')">
           QUERO RECEBER AS PRÓXIMOS OFERTAS
         </a>
       </div>
@@ -1934,7 +1956,7 @@
         Mas só quem está dentro vai ver. Entre agora, é gratuito.
       </p>
 
-      <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-entrar-grupo">
+      <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-entrar-grupo" id="btn-whatsapp-final" data-location="Rodapé Final" onclick="trackWhatsAppClick(event, 'Rodapé Final')">
         ENTRAR NO GRUPO, É GRATUITO
       </a>
 
@@ -1978,7 +2000,7 @@
         </p>
       </div>
 
-      <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-dds-gold btn-modal-cta">
+      <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-dds-gold btn-modal-cta" id="btn-whatsapp-modal" data-location="Modal Oferta" onclick="trackWhatsAppClick(event, 'Modal Oferta')">
         VER ESTA OFERTA NO WHATSAPP
       </a>
 
@@ -2022,9 +2044,12 @@
       }
     ];
 
+    let currentSelectedOffer = null;
+
     function openOfferModal(index) {
       const data = offersData[index];
       if (!data) return;
+      currentSelectedOffer = data;
       document.getElementById('modalCarImg').src = data.img;
       document.getElementById('modalCarImg').alt = data.title;
       document.getElementById('modalCarLoc').textContent = data.location;
@@ -2033,6 +2058,26 @@
 
       document.getElementById('offerModal').classList.add('active');
       document.body.style.overflow = 'hidden';
+    }
+
+    function trackWhatsAppClick(event, location) {
+      const eventParams = {
+        content_name: 'Comunidade VIP WhatsApp',
+        button_location: location,
+        destination_url: 'https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy'
+      };
+
+      if (location === 'Modal Oferta' && currentSelectedOffer) {
+        eventParams.car_title = currentSelectedOffer.title;
+        eventParams.car_price = currentSelectedOffer.price;
+      }
+
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead', eventParams);
+        fbq('trackCustom', 'WhatsAppClick', eventParams);
+      }
+      
+      console.log('[Meta Ads Pixel] Lead rastreado com sucesso:', eventParams);
     }
 
     function closeOfferModal(e) {
