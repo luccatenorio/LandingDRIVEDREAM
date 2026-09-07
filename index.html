@@ -2058,6 +2058,19 @@
 
       document.getElementById('offerModal').classList.add('active');
       document.body.style.overflow = 'hidden';
+
+      if (typeof fbq === 'function') {
+        fbq('track', 'ViewContent', {
+          content_name: data.title,
+          content_category: 'Oferta Repasse Carro',
+          value: parseFloat(data.price.replace(/[^\d]/g, '')) || 0,
+          currency: 'BRL'
+        });
+        fbq('trackCustom', 'ViewOfferModal', {
+          car_title: data.title,
+          car_price: data.price
+        });
+      }
     }
 
     function trackWhatsAppClick(event, location) {
@@ -2074,10 +2087,11 @@
 
       if (typeof fbq === 'function') {
         fbq('track', 'Lead', eventParams);
+        fbq('track', 'Contact', eventParams);
         fbq('trackCustom', 'WhatsAppClick', eventParams);
       }
       
-      console.log('[Meta Ads Pixel] Lead rastreado com sucesso:', eventParams);
+      console.log('[Meta Ads Pixel] Lead & Contact rastreado com sucesso:', eventParams);
     }
 
     function closeOfferModal(e) {
