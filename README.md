@@ -29,7 +29,7 @@ Página de alta conversão para a **Drive Dream Sales**, focada exclusivamente n
    - **Prova Social**: Largura de card `75vw` permitindo visualizar 2 depoimentos simultaneamente na tela com rolagem horizontal ativa para todos os 10 comentários.
 
 6. **Link Oficial do WhatsApp & Favicon**:
-   - URL Oficial: `https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy`
+   - URL Oficial: `https://chat.whatsapp.com/JrykAzKvCm8JiRI22LKgiZ`
    - Favicon com o brasão oficial DDS (`assets/official_dds_logo.jpg`).
 
 ## 🚀 Como Executar o Servidor Local

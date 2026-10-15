@@ -26,7 +26,16 @@
     
     fbq('init', window.META_PIXEL_ID);
     fbq('track', 'PageView');
-  </script>
+
+    // Diagnostico: diz no console se o pixel realmente carregou ou se foi bloqueado.
+    window.addEventListener('load', function () {
+      var ok = typeof fbq === 'function' && typeof fbq.getState === 'function';
+      console.log('[Meta Ads Pixel] Diagnostico'
+        + ' | Pixel ID: ' + window.META_PIXEL_ID
+        + ' | fbevents.js carregou: ' + (ok ? 'SIM' : 'NAO - BLOQUEADO')
+        + ' | Dominio: ' + location.hostname);
+    });
+</script>
   <noscript>
     <img height="1" width="1" style="display:none"
          src="https://www.facebook.com/tr?id=1580432243396646&ev=PageView&noscript=1"/>
@@ -1453,7 +1462,7 @@
             As melhores ofertas somem em minutos. Quem está dentro, compra primeiro.
           </div>
 
-          <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-dds-gold" id="btn-whatsapp-hero" data-location="Hero" onclick="trackWhatsAppClick(event, 'Hero')">
+          <a href="https://chat.whatsapp.com/JrykAzKvCm8JiRI22LKgiZ" target="_blank" class="btn-dds-gold" id="btn-whatsapp-hero" data-location="Hero" onclick="trackWhatsAppClick(event, 'Hero')">
             QUERO ENTRAR NO GRUPO VIP
           </a>
 
@@ -1775,7 +1784,7 @@
 
       <!-- Button Directly Below Deals Slider -->
       <div class="proximos-btn-wrap">
-        <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-dds-gold" id="btn-whatsapp-ofertas" data-location="Ofertas Slider" onclick="trackWhatsAppClick(event, 'Ofertas Slider')">
+        <a href="https://chat.whatsapp.com/JrykAzKvCm8JiRI22LKgiZ" target="_blank" class="btn-dds-gold" id="btn-whatsapp-ofertas" data-location="Ofertas Slider" onclick="trackWhatsAppClick(event, 'Ofertas Slider')">
           QUERO RECEBER AS PRÓXIMOS OFERTAS
         </a>
       </div>
@@ -1956,7 +1965,7 @@
         Mas só quem está dentro vai ver. Entre agora, é gratuito.
       </p>
 
-      <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-entrar-grupo" id="btn-whatsapp-final" data-location="Rodapé Final" onclick="trackWhatsAppClick(event, 'Rodapé Final')">
+      <a href="https://chat.whatsapp.com/JrykAzKvCm8JiRI22LKgiZ" target="_blank" class="btn-entrar-grupo" id="btn-whatsapp-final" data-location="Rodapé Final" onclick="trackWhatsAppClick(event, 'Rodapé Final')">
         ENTRAR NO GRUPO, É GRATUITO
       </a>
 
@@ -2000,7 +2009,7 @@
         </p>
       </div>
 
-      <a href="https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy" target="_blank" class="btn-dds-gold btn-modal-cta" id="btn-whatsapp-modal" data-location="Modal Oferta" onclick="trackWhatsAppClick(event, 'Modal Oferta')">
+      <a href="https://chat.whatsapp.com/JrykAzKvCm8JiRI22LKgiZ" target="_blank" class="btn-dds-gold btn-modal-cta" id="btn-whatsapp-modal" data-location="Modal Oferta" onclick="trackWhatsAppClick(event, 'Modal Oferta')">
         VER ESTA OFERTA NO WHATSAPP
       </a>
 
@@ -2077,7 +2086,7 @@
       const eventParams = {
         content_name: 'Comunidade VIP WhatsApp',
         button_location: location,
-        destination_url: 'https://chat.whatsapp.com/DXg4VfVJbjhCtqEBcYNHoy'
+        destination_url: 'https://chat.whatsapp.com/JrykAzKvCm8JiRI22LKgiZ'
       };
 
       if (location === 'Modal Oferta' && currentSelectedOffer) {
@@ -2085,15 +2094,23 @@
         eventParams.car_price = currentSelectedOffer.price;
       }
 
-      if (typeof fbq === 'function') {
+      // fbq existe assim que o snippet inline roda, mas so envia de verdade
+      // depois que o fbevents.js do Facebook carrega. getState so existe nesse caso.
+      const pixelPronto = typeof fbq === 'function' && typeof fbq.getState === 'function';
+
+      if (pixelPronto) {
         fbq('track', 'CompleteRegistration', eventParams);
         fbq('track', 'Lead', eventParams);
         fbq('track', 'Contact', eventParams);
         fbq('trackCustom', 'EntrouComunidade', eventParams);
         fbq('trackCustom', 'WhatsAppClick', eventParams);
+        console.log('[Meta Ads Pixel] OK - eventos ENVIADOS ao pixel ' + window.META_PIXEL_ID + ':', eventParams);
+      } else if (typeof fbq === 'function') {
+        console.error('[Meta Ads Pixel] BLOQUEADO - o fbevents.js do Facebook nao carregou ' +
+                      '(bloqueador de anuncios / Brave Shields?). NENHUM evento foi enviado.');
+      } else {
+        console.error('[Meta Ads Pixel] ERRO - fbq nao existe. O snippet do pixel nao rodou nesta pagina.');
       }
-      
-      console.log('[Meta Ads Pixel] Eventos de conversao disparados:', eventParams);
     }
 
     function closeOfferModal(e) {
